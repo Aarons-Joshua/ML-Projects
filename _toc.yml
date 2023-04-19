@@ -1,0 +1,5 @@
+# In _toc.yml
+format: jb-book
+root: README
+chapters:
+- file: Linear_Regression_First_Model

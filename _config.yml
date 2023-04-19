@@ -1,0 +1,6 @@
+# In _config.yml
+title: My sample book
+author: Joshua Aarons
+logo: logo.png
+execute:
+  execute_notebooks: cache
