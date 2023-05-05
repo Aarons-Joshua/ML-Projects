@@ -157,6 +157,7 @@ const thebe_selector_output = ".output, .cell_output"
         </ul>
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Financial Modelling And Machine Learning</a></li>
+
 </ul>
 
     </div>
@@ -303,6 +304,7 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Financial Modelling And Machine Learning</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#before-using-data-we-must-download-a-library-which-can-take-live-stock-data-from-the-market">Before using data, we must download a library which can take live stock data from the market.</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#libraries-must-be-downloaded-to-be-used-with-the-linear-regression-model">Libraries Must be Downloaded to be used with the linear regression model</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#download-live-stock-data-using-specific-ticker">Download live stock data using specific ticker</a></li>
@@ -310,7 +312,24 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-stock-data-can-be-fit-over-all-time-and-a-trend-can-be-calulated">The stock data can be fit over all time and a trend can be calulated</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#running-a-trendline-on-the-full-set-of-data-down-not-make-logical-sense-so-what-do-you-do">Running a trendline on the full set of data down not make logical sense, so what do you do?</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-a-trendline-does-not-predict-data-so-you-must-predict-into-the-future">Creating a trendline does not predict data, so you must predict into the future</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regressions-can-be-split">Regressions can be split</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#principle-componant-anlysis-and-kmeans-clustering">Principle Componant Anlysis And KMeans Clustering</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-can-be-grouped-for-ease-of-analysis">Data Can be grouped for ease of analysis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-must-be-cleaned">Data must be cleaned</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plotting-data">Plotting Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#categorical-data-cannot-be-analzed-yet">Categorical Data cannot be analzed… yet…</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cluster-data">Cluster Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-train-and-evaluation">Data Train and Evaluation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#final-clustering-and-data-analysis">Final Clustering and Data Analysis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pca-was-run-with-4-components-to-see-which-had-the-largest-effect-on-the-data">PCA was run with 4 components to see which had the largest effect on the data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plotting-pca">Plotting PCA</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-data-can-be-clustered-into-six-distince-clusters">The data can be clustered into six distince clusters</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#seeing-difference-between-clusters-and-values">Seeing Difference between clusters and values</a></li>
 </ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">Conclusion</a></li>
+</ul>
+
             </nav>
         </div>
     </div>
@@ -336,29 +355,29 @@ document.write(`
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: yfinance in c:\users\12032\downloads\wpy64-31050\python-3.10.5.amd64\lib\site-packages (0.2.9)
-Requirement already satisfied: lxml&gt;=4.9.1 in c:\users\12032\downloads\wpy64-31050\python-3.10.5.amd64\lib\site-packages (from yfinance) (4.9.2)
-Requirement already satisfied: numpy&gt;=1.16.5 in c:\users\12032\downloads\wpy64-31050\python-3.10.5.amd64\lib\site-packages (from yfinance) (1.22.4+mkl)
-Requirement already satisfied: multitasking&gt;=0.0.7 in c:\users\12032\downloads\wpy64-31050\python-3.10.5.amd64\lib\site-packages (from yfinance) (0.0.11)
 Requirement already satisfied: appdirs&gt;=1.4.4 in c:\users\12032\downloads\wpy64-31050\python-3.10.5.amd64\lib\site-packages (from yfinance) (1.4.4)
 Requirement already satisfied: frozendict&gt;=2.3.4 in c:\users\12032\downloads\wpy64-31050\python-3.10.5.amd64\lib\site-packages (from yfinance) (2.3.4)
-Requirement already satisfied: cryptography&gt;=3.3.2 in c:\users\12032\downloads\wpy64-31050\python-3.10.5.amd64\lib\site-packages (from yfinance) (3.4.7)
-Requirement already satisfied: beautifulsoup4&gt;=4.11.1 in c:\users\12032\downloads\wpy64-31050\python-3.10.5.amd64\lib\site-packages (from yfinance) (4.11.1)
 Requirement already satisfied: requests&gt;=2.26 in c:\users\12032\downloads\wpy64-31050\python-3.10.5.amd64\lib\site-packages (from yfinance) (2.27.1)
-Requirement already satisfied: pytz&gt;=2022.5 in c:\users\12032\downloads\wpy64-31050\python-3.10.5.amd64\lib\site-packages (from yfinance) (2022.7.1)
+Requirement already satisfied: lxml&gt;=4.9.1 in c:\users\12032\downloads\wpy64-31050\python-3.10.5.amd64\lib\site-packages (from yfinance) (4.9.2)
+Requirement already satisfied: multitasking&gt;=0.0.7 in c:\users\12032\downloads\wpy64-31050\python-3.10.5.amd64\lib\site-packages (from yfinance) (0.0.11)
 Requirement already satisfied: pandas&gt;=1.3.0 in c:\users\12032\downloads\wpy64-31050\python-3.10.5.amd64\lib\site-packages (from yfinance) (1.4.3)
+Requirement already satisfied: pytz&gt;=2022.5 in c:\users\12032\downloads\wpy64-31050\python-3.10.5.amd64\lib\site-packages (from yfinance) (2022.7.1)
+Requirement already satisfied: beautifulsoup4&gt;=4.11.1 in c:\users\12032\downloads\wpy64-31050\python-3.10.5.amd64\lib\site-packages (from yfinance) (4.11.1)
+Requirement already satisfied: numpy&gt;=1.16.5 in c:\users\12032\downloads\wpy64-31050\python-3.10.5.amd64\lib\site-packages (from yfinance) (1.22.4+mkl)
+Requirement already satisfied: cryptography&gt;=3.3.2 in c:\users\12032\downloads\wpy64-31050\python-3.10.5.amd64\lib\site-packages (from yfinance) (3.4.7)
 Requirement already satisfied: html5lib&gt;=1.1 in c:\users\12032\downloads\wpy64-31050\python-3.10.5.amd64\lib\site-packages (from yfinance) (1.1)
 Requirement already satisfied: soupsieve&gt;1.2 in c:\users\12032\downloads\wpy64-31050\python-3.10.5.amd64\lib\site-packages (from beautifulsoup4&gt;=4.11.1-&gt;yfinance) (2.3.2.post1)
 Requirement already satisfied: cffi&gt;=1.12 in c:\users\12032\downloads\wpy64-31050\python-3.10.5.amd64\lib\site-packages (from cryptography&gt;=3.3.2-&gt;yfinance) (1.15.0)
 Requirement already satisfied: six&gt;=1.9 in c:\users\12032\downloads\wpy64-31050\python-3.10.5.amd64\lib\site-packages (from html5lib&gt;=1.1-&gt;yfinance) (1.16.0)
 Requirement already satisfied: webencodings in c:\users\12032\downloads\wpy64-31050\python-3.10.5.amd64\lib\site-packages (from html5lib&gt;=1.1-&gt;yfinance) (0.5.1)
 Requirement already satisfied: python-dateutil&gt;=2.8.1 in c:\users\12032\downloads\wpy64-31050\python-3.10.5.amd64\lib\site-packages (from pandas&gt;=1.3.0-&gt;yfinance) (2.8.2)
-Requirement already satisfied: certifi&gt;=2017.4.17 in c:\users\12032\downloads\wpy64-31050\python-3.10.5.amd64\lib\site-packages (from requests&gt;=2.26-&gt;yfinance) (2022.5.18.1)
-Requirement already satisfied: urllib3&lt;1.27,&gt;=1.21.1 in c:\users\12032\downloads\wpy64-31050\python-3.10.5.amd64\lib\site-packages (from requests&gt;=2.26-&gt;yfinance) (1.26.10)
-Requirement already satisfied: idna&lt;4,&gt;=2.5 in c:\users\12032\downloads\wpy64-31050\python-3.10.5.amd64\lib\site-packages (from requests&gt;=2.26-&gt;yfinance) (3.1)
 Requirement already satisfied: charset-normalizer~=2.0.0 in c:\users\12032\downloads\wpy64-31050\python-3.10.5.amd64\lib\site-packages (from requests&gt;=2.26-&gt;yfinance) (2.0.12)
+Requirement already satisfied: idna&lt;4,&gt;=2.5 in c:\users\12032\downloads\wpy64-31050\python-3.10.5.amd64\lib\site-packages (from requests&gt;=2.26-&gt;yfinance) (3.1)
+Requirement already satisfied: urllib3&lt;1.27,&gt;=1.21.1 in c:\users\12032\downloads\wpy64-31050\python-3.10.5.amd64\lib\site-packages (from requests&gt;=2.26-&gt;yfinance) (1.26.10)
+Requirement already satisfied: certifi&gt;=2017.4.17 in c:\users\12032\downloads\wpy64-31050\python-3.10.5.amd64\lib\site-packages (from requests&gt;=2.26-&gt;yfinance) (2022.5.18.1)
 Requirement already satisfied: pycparser in c:\users\12032\downloads\wpy64-31050\python-3.10.5.amd64\lib\site-packages (from cffi&gt;=1.12-&gt;cryptography&gt;=3.3.2-&gt;yfinance) (2.21)
 
-[notice] A new release of pip available: 22.1.2 -&gt; 23.1
+[notice] A new release of pip available: 22.1.2 -&gt; 23.1.2
 [notice] To update, run: python.exe -m pip install --upgrade pip
 </pre></div>
 </div>
@@ -495,54 +514,54 @@ Requirement already satisfied: pycparser in c:\users\12032\downloads\wpy64-31050
       <td>...</td>
     </tr>
     <tr>
-      <th>2023-04-14 00:00:00-04:00</th>
-      <td>101.190002</td>
-      <td>101.709999</td>
-      <td>100.970001</td>
-      <td>101.680000</td>
-      <td>101.680000</td>
-      <td>3017700</td>
+      <th>2023-04-28 00:00:00-04:00</th>
+      <td>99.070000</td>
+      <td>99.910004</td>
+      <td>98.790001</td>
+      <td>99.900002</td>
+      <td>99.900002</td>
+      <td>2875900</td>
     </tr>
     <tr>
-      <th>2023-04-17 00:00:00-04:00</th>
-      <td>101.910004</td>
-      <td>103.290001</td>
-      <td>101.800003</td>
-      <td>103.110001</td>
-      <td>103.110001</td>
-      <td>4007400</td>
+      <th>2023-05-01 00:00:00-04:00</th>
+      <td>99.930000</td>
+      <td>101.379997</td>
+      <td>99.839996</td>
+      <td>100.330002</td>
+      <td>100.330002</td>
+      <td>3481400</td>
     </tr>
     <tr>
-      <th>2023-04-18 00:00:00-04:00</th>
-      <td>103.379997</td>
-      <td>104.709999</td>
-      <td>103.209999</td>
-      <td>104.660004</td>
-      <td>104.660004</td>
-      <td>4949200</td>
+      <th>2023-05-02 00:00:00-04:00</th>
+      <td>100.160004</td>
+      <td>100.160004</td>
+      <td>98.269997</td>
+      <td>98.870003</td>
+      <td>98.870003</td>
+      <td>3377500</td>
     </tr>
     <tr>
-      <th>2023-04-19 00:00:00-04:00</th>
-      <td>104.629997</td>
-      <td>104.910004</td>
-      <td>103.860001</td>
-      <td>104.089996</td>
-      <td>104.089996</td>
-      <td>5003800</td>
+      <th>2023-05-03 00:00:00-04:00</th>
+      <td>98.809998</td>
+      <td>99.160004</td>
+      <td>97.040001</td>
+      <td>97.160004</td>
+      <td>97.160004</td>
+      <td>3610800</td>
     </tr>
     <tr>
-      <th>2023-04-20 00:00:00-04:00</th>
-      <td>103.110001</td>
-      <td>103.309998</td>
-      <td>102.404999</td>
-      <td>102.820000</td>
-      <td>102.820000</td>
-      <td>723150</td>
+      <th>2023-05-04 00:00:00-04:00</th>
+      <td>97.000000</td>
+      <td>97.269997</td>
+      <td>94.860001</td>
+      <td>95.919998</td>
+      <td>95.919998</td>
+      <td>4414000</td>
     </tr>
   </tbody>
 </table>
-<p>15368 rows × 6 columns</p>
-</div></div><img alt="_images/889fa24f35bb073d6ac630e584ef51abe929707e50faaa0cc1b27711199e5111.png" src="_images/889fa24f35bb073d6ac630e584ef51abe929707e50faaa0cc1b27711199e5111.png" />
+<p>15378 rows × 6 columns</p>
+</div></div><img alt="_images/b7b1300f51b70797ed743468de9b287ac67a6c86bec6143f17e916e0d2625f5b.png" src="_images/b7b1300f51b70797ed743468de9b287ac67a6c86bec6143f17e916e0d2625f5b.png" />
 </div>
 </div>
 </section>
@@ -590,29 +609,29 @@ Requirement already satisfied: pycparser in c:\users\12032\downloads\wpy64-31050
   </thead>
   <tbody>
     <tr>
-      <th>2023-04-14 00:00:00-04:00</th>
-      <td>15364</td>
-      <td>101.68</td>
+      <th>2023-04-28 00:00:00-04:00</th>
+      <td>15374</td>
+      <td>99.90</td>
     </tr>
     <tr>
-      <th>2023-04-17 00:00:00-04:00</th>
-      <td>15365</td>
-      <td>103.11</td>
+      <th>2023-05-01 00:00:00-04:00</th>
+      <td>15375</td>
+      <td>100.33</td>
     </tr>
     <tr>
-      <th>2023-04-18 00:00:00-04:00</th>
-      <td>15366</td>
-      <td>104.66</td>
+      <th>2023-05-02 00:00:00-04:00</th>
+      <td>15376</td>
+      <td>98.87</td>
     </tr>
     <tr>
-      <th>2023-04-19 00:00:00-04:00</th>
-      <td>15367</td>
-      <td>104.09</td>
+      <th>2023-05-03 00:00:00-04:00</th>
+      <td>15377</td>
+      <td>97.16</td>
     </tr>
     <tr>
-      <th>2023-04-20 00:00:00-04:00</th>
-      <td>15368</td>
-      <td>102.82</td>
+      <th>2023-05-04 00:00:00-04:00</th>
+      <td>15378</td>
+      <td>95.92</td>
     </tr>
   </tbody>
 </table>
@@ -641,7 +660,7 @@ Requirement already satisfied: pycparser in c:\users\12032\downloads\wpy64-31050
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([ 5.51752875e-03, -2.01885022e+01])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([ 5.52637044e-03, -2.02338140e+01])
 </pre></div>
 </div>
 </div>
@@ -657,10 +676,10 @@ Requirement already satisfied: pycparser in c:\users\12032\downloads\wpy64-31050
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x206f9501930&gt;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x14ca20093c0&gt;]
 </pre></div>
 </div>
-<img alt="_images/00e88bf46fb1a73bccc7b001a8002be4f611156abda81a934eed0c6fe0aa1d63.png" src="_images/00e88bf46fb1a73bccc7b001a8002be4f611156abda81a934eed0c6fe0aa1d63.png" />
+<img alt="_images/e3adfb4bc26ef725853735be240e7e1ca42496ed83be8756148313a1ad18ee40.png" src="_images/e3adfb4bc26ef725853735be240e7e1ca42496ed83be8756148313a1ad18ee40.png" />
 </div>
 </div>
 </section>
@@ -679,7 +698,7 @@ Requirement already satisfied: pycparser in c:\users\12032\downloads\wpy64-31050
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([ 2.91172235e-02, -3.47659904e+02])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([ 2.43476382e-02, -2.74574633e+02])
 </pre></div>
 </div>
 </div>
@@ -698,10 +717,10 @@ Requirement already satisfied: pycparser in c:\users\12032\downloads\wpy64-31050
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x206f9a53340&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x14ca2563130&gt;
 </pre></div>
 </div>
-<img alt="_images/c2f3623adb39e4869aa27762466f58c19eb7f192f2ee5f1ca22b25614fbcfcb6.png" src="_images/c2f3623adb39e4869aa27762466f58c19eb7f192f2ee5f1ca22b25614fbcfcb6.png" />
+<img alt="_images/a7f0a219b5f1fe37b2a13b510c3c2a7511497f9c5cd16d9b0aab57084189f291.png" src="_images/a7f0a219b5f1fe37b2a13b510c3c2a7511497f9c5cd16d9b0aab57084189f291.png" />
 </div>
 </div>
 </section>
@@ -755,21 +774,27 @@ Requirement already satisfied: pycparser in c:\users\12032\downloads\wpy64-31050
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The Predictions for the next  100  Days are: 
-  [ 99.81  99.84  99.87  99.9   99.93  99.96  99.99 100.02 100.05 100.08
- 100.1  100.13 100.16 100.19 100.22 100.25 100.28 100.31 100.34 100.37
- 100.4  100.43 100.45 100.48 100.51 100.54 100.57 100.6  100.63 100.66
- 100.69 100.72 100.75 100.77 100.8  100.83 100.86 100.89 100.92 100.95
- 100.98 101.01 101.04 101.07 101.09 101.12 101.15 101.18 101.21 101.24
- 101.27 101.3  101.33 101.36 101.39 101.42 101.44 101.47 101.5  101.53
- 101.56 101.59 101.62 101.65 101.68 101.71 101.74 101.76 101.79 101.82
- 101.85 101.88 101.91 101.94 101.97 102.   102.03 102.06 102.08 102.11
- 102.14 102.17 102.2  102.23 102.26 102.29 102.32 102.35 102.38 102.41
- 102.43 102.46 102.49 102.52 102.55 102.58 102.61 102.64 102.67 102.7 ]
+  [ 99.84  99.87  99.89  99.92  99.94  99.97  99.99 100.01 100.04 100.06
+ 100.09 100.11 100.14 100.16 100.18 100.21 100.23 100.26 100.28 100.31
+ 100.33 100.35 100.38 100.4  100.43 100.45 100.48 100.5  100.53 100.55
+ 100.57 100.6  100.62 100.65 100.67 100.7  100.72 100.74 100.77 100.79
+ 100.82 100.84 100.87 100.89 100.91 100.94 100.96 100.99 101.01 101.04
+ 101.06 101.09 101.11 101.13 101.16 101.18 101.21 101.23 101.26 101.28
+ 101.3  101.33 101.35 101.38 101.4  101.43 101.45 101.47 101.5  101.52
+ 101.55 101.57 101.6  101.62 101.65 101.67 101.69 101.72 101.74 101.77
+ 101.79 101.82 101.84 101.86 101.89 101.91 101.94 101.96 101.99 102.01
+ 102.03 102.06 102.08 102.11 102.13 102.16 102.18 102.21 102.23 102.25]
 </pre></div>
 </div>
-<img alt="_images/6a6193f141260d623e88624a8e29eaab1e2ff28952854b85d2cb761c718f475a.png" src="_images/6a6193f141260d623e88624a8e29eaab1e2ff28952854b85d2cb761c718f475a.png" />
+<img alt="_images/6b90b8224c5a258c6e6386b156dc2c3107549f247b8069f65552ec4993527548.png" src="_images/6b90b8224c5a258c6e6386b156dc2c3107549f247b8069f65552ec4993527548.png" />
 </div>
 </div>
+</section>
+<section id="regressions-can-be-split">
+<h2>Regressions can be split<a class="headerlink" href="#regressions-can-be-split" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>You can split up the regression model into different sections to get a better representation of the data</p></li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">reg1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">polyfit</span><span class="p">(</span><span class="n">df_close</span><span class="p">[</span><span class="s2">&quot;Time&quot;</span><span class="p">][</span><span class="o">-</span><span class="mi">63</span><span class="p">:],</span><span class="n">df_close</span><span class="p">[</span><span class="s2">&quot;Close&quot;</span><span class="p">][</span><span class="o">-</span><span class="mi">63</span><span class="p">:],</span> <span class="n">deg</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
@@ -794,10 +819,10 @@ Requirement already satisfied: pycparser in c:\users\12032\downloads\wpy64-31050
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x206f99ebf70&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x14ca24f4ca0&gt;
 </pre></div>
 </div>
-<img alt="_images/5f25c509cde8d2fcae6f9b65c4dbaa202cf06f4eca67596026dba0c9d2b462f8.png" src="_images/5f25c509cde8d2fcae6f9b65c4dbaa202cf06f4eca67596026dba0c9d2b462f8.png" />
+<img alt="_images/3a74bffaaa17ea023841dfeb0f958df60d094189d11edf2a8e743d68777a895c.png" src="_images/3a74bffaaa17ea023841dfeb0f958df60d094189d11edf2a8e743d68777a895c.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -826,19 +851,21 @@ Requirement already satisfied: pycparser in c:\users\12032\downloads\wpy64-31050
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x206f9977940&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x14ca1a0feb0&gt;
 </pre></div>
 </div>
-<img alt="_images/5f25c509cde8d2fcae6f9b65c4dbaa202cf06f4eca67596026dba0c9d2b462f8.png" src="_images/5f25c509cde8d2fcae6f9b65c4dbaa202cf06f4eca67596026dba0c9d2b462f8.png" />
+<img alt="_images/3a74bffaaa17ea023841dfeb0f958df60d094189d11edf2a8e743d68777a895c.png" src="_images/3a74bffaaa17ea023841dfeb0f958df60d094189d11edf2a8e743d68777a895c.png" />
 </div>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Principle Componant Analysis</span>
-</pre></div>
-</div>
-</div>
-</div>
+</section>
+<section id="principle-componant-anlysis-and-kmeans-clustering">
+<h2>Principle Componant Anlysis And KMeans Clustering<a class="headerlink" href="#principle-componant-anlysis-and-kmeans-clustering" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>KMeans Clustering Can be used to cluster data, even after run through PCA</p></li>
+<li><p>Principle componant anlysis (PCA) can be used to dial down the dimensions of specific data.</p></li>
+<li><p>This data is represented by the variance of the data represented on a specific plane</p></li>
+<li><p>First, you must import PCA from “sklearn.decomposition”</p></li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
@@ -1147,6 +1174,16 @@ Requirement already satisfied: pycparser in c:\users\12032\downloads\wpy64-31050
 <p>10 rows × 23 columns</p>
 </div></div></div>
 </div>
+</section>
+<section id="data-can-be-grouped-for-ease-of-analysis">
+<h2>Data Can be grouped for ease of analysis<a class="headerlink" href="#data-can-be-grouped-for-ease-of-analysis" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Grouping the data allows for anlysis of data with less expected values.</p>
+<ul>
+<li><p>For example, you can turn a value of dog life into different values such as young, middle, and old, each group representitive of specific ages</p></li>
+</ul>
+</li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Proc_dog</span> <span class="o">=</span> <span class="n">data_dog</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">deep</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="c1">#Copies data dog and creates new RAM space on computer</span>
@@ -1484,6 +1521,17 @@ Requirement already satisfied: pycparser in c:\users\12032\downloads\wpy64-31050
 <p>97 rows × 29 columns</p>
 </div></div></div>
 </div>
+</section>
+<section id="data-must-be-cleaned">
+<h2>Data must be cleaned<a class="headerlink" href="#data-must-be-cleaned" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Before analysis can be done, you must check for null values of any data. If there are null values, it can throw off the data analysis process.</p>
+<ul>
+<li><p>use “.isnull()” to find all null values and “.dropna()” to lose the rows which have null values</p></li>
+</ul>
+</li>
+<li><p>You can choose the features or columns that you want so you are not working with data that is too large. As data size increases, so does computing time. Therefore, choose features which have a few values. This helps from before when we grouped data to three distinc values instead of many different values</p></li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data_dog</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="c1">#Checking for any missing valuesfor f in features:</span>
@@ -1578,6 +1626,12 @@ The number of unique values for feature barking:6 -- [0 1 2 3 4 5]
 </div>
 </div>
 </div>
+</section>
+<section id="plotting-data">
+<h2>Plotting Data<a class="headerlink" href="#plotting-data" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Plot the data in groups using the seaborne library to see what you are working with and see if there are any already apparent trends in the data</p></li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Plotting the different occurances of each type of data</span>
@@ -1616,6 +1670,16 @@ The number of unique values for feature barking:6 -- [0 1 2 3 4 5]
 <img alt="_images/d17499db1311ee82871f96ada8f777702e8da6e5ae73e51c8df7e2ecb8b436ff.png" src="_images/d17499db1311ee82871f96ada8f777702e8da6e5ae73e51c8df7e2ecb8b436ff.png" />
 </div>
 </div>
+</section>
+<section id="categorical-data-cannot-be-analzed-yet">
+<h2>Categorical Data cannot be analzed… yet…<a class="headerlink" href="#categorical-data-cannot-be-analzed-yet" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>To analyze categorical data, you must turn it to numerical data (1’s and 0’s). To do this, use the “get_dummies” function.</p>
+<ul>
+<li><p>This takes two inputs, your raw data, and column of data frame names</p></li>
+</ul>
+</li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Representing catagories as numerical </span>
@@ -1950,33 +2014,22 @@ The number of unique values for feature barking:6 -- [0 1 2 3 4 5]
 <p>97 rows × 74 columns</p>
 </div></div></div>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Clustering the Data</span>
-
-<span class="n">X_train</span> <span class="o">=</span> <span class="n">new_raw_data</span><span class="o">.</span><span class="n">values</span>
-
-<span class="n">kmeans</span> <span class="o">=</span> <span class="n">KMeans</span><span class="p">(</span><span class="n">n_clusters</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span><span class="n">random_state</span> <span class="o">=</span> <span class="mi">300</span><span class="p">)</span> <span class="c1">#Creates Clusters and fits data</span>
-<span class="n">kmeans</span> <span class="o">=</span> <span class="n">kmeans</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The clusters for the data are: &#39;</span><span class="p">,</span><span class="n">kmeans</span><span class="o">.</span><span class="n">labels_</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The intertia for the data is: &#39;</span><span class="p">,</span><span class="n">kmeans</span><span class="o">.</span><span class="n">inertia_</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The clusters for the data are:  [3 3 3 4 3 4 0 4 0 1 0 3 4 0 4 2 2 3 2 0 3 4 3 3 1 3 3 2 3 3 0 2 1 4 0 2 3
- 2 2 2 1 1 2 0 4 1 3 1 4 3 4 4 4 1 3 2 0 0 1 4 2 2 3 2 4 2 4 1 2 3 0 0 1 4
- 2 0 4 2 4 1 1 0 4 2 3 3 3 4 4 4 4 0 2 1 4 0 3]
-The intertia for the data is:  620.6820393374742
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\12032\Downloads\WPy64-31050\python-3.10.5.amd64\lib\site-packages\sklearn\cluster\_kmeans.py:1332: UserWarning: KMeans is known to have a memory leak on Windows with MKL, when there are less chunks than available threads. You can avoid it by setting the environment variable OMP_NUM_THREADS=1.
-  warnings.warn(
-</pre></div>
-</div>
-</div>
-</div>
+</section>
+<section id="cluster-data">
+<h2>Cluster Data<a class="headerlink" href="#cluster-data" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Data can be clustered initially place the data into specific categories.</p></li>
+<li><p>You can check which clustering is most accurate by calculating the inertia of the data using the “.inertia_” function in the KMeans library.</p>
+<ul>
+<li><p>Plotting this inertia can help find which cluster number is the best for grouping the data.</p></li>
+<li><p>The goal is to minimize inertia of the data, but this is not a linear trend. The inertia starts to decrease in an exponential decay fashion. Therefore, the payoff for more clusters does not necessarily mean the best data clustering.</p>
+<ul>
+<li><p>You can plot this inertia vs cluster to see where the tradeoff point is. You look for an “Elbow” or point in data where inertia change becomes smaller</p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Checking the best clustering of data</span>
@@ -1995,82 +2048,16 @@ The intertia for the data is:  620.6820393374742
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\12032\Downloads\WPy64-31050\python-3.10.5.amd64\lib\site-packages\sklearn\cluster\_kmeans.py:1332: UserWarning: KMeans is known to have a memory leak on Windows with MKL, when there are less chunks than available threads. You can avoid it by setting the environment variable OMP_NUM_THREADS=1.
-  warnings.warn(
-C:\Users\12032\Downloads\WPy64-31050\python-3.10.5.amd64\lib\site-packages\sklearn\cluster\_kmeans.py:1332: UserWarning: KMeans is known to have a memory leak on Windows with MKL, when there are less chunks than available threads. You can avoid it by setting the environment variable OMP_NUM_THREADS=1.
-  warnings.warn(
-C:\Users\12032\Downloads\WPy64-31050\python-3.10.5.amd64\lib\site-packages\sklearn\cluster\_kmeans.py:1332: UserWarning: KMeans is known to have a memory leak on Windows with MKL, when there are less chunks than available threads. You can avoid it by setting the environment variable OMP_NUM_THREADS=1.
-  warnings.warn(
-C:\Users\12032\Downloads\WPy64-31050\python-3.10.5.amd64\lib\site-packages\sklearn\cluster\_kmeans.py:1332: UserWarning: KMeans is known to have a memory leak on Windows with MKL, when there are less chunks than available threads. You can avoid it by setting the environment variable OMP_NUM_THREADS=1.
-  warnings.warn(
-C:\Users\12032\Downloads\WPy64-31050\python-3.10.5.amd64\lib\site-packages\sklearn\cluster\_kmeans.py:1332: UserWarning: KMeans is known to have a memory leak on Windows with MKL, when there are less chunks than available threads. You can avoid it by setting the environment variable OMP_NUM_THREADS=1.
-  warnings.warn(
-C:\Users\12032\Downloads\WPy64-31050\python-3.10.5.amd64\lib\site-packages\sklearn\cluster\_kmeans.py:1332: UserWarning: KMeans is known to have a memory leak on Windows with MKL, when there are less chunks than available threads. You can avoid it by setting the environment variable OMP_NUM_THREADS=1.
-  warnings.warn(
-C:\Users\12032\Downloads\WPy64-31050\python-3.10.5.amd64\lib\site-packages\sklearn\cluster\_kmeans.py:1332: UserWarning: KMeans is known to have a memory leak on Windows with MKL, when there are less chunks than available threads. You can avoid it by setting the environment variable OMP_NUM_THREADS=1.
-  warnings.warn(
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The inertia for :  2  clusters is:  706.1079931972789
-The inertia for :  3  clusters is:  670.4175
-The inertia for :  4  clusters is:  641.2485568275042
-The inertia for :  5  clusters is:  620.6820393374742
-The inertia for :  6  clusters is:  600.070843776107
-The inertia for :  7  clusters is:  580.8815269697624
-The inertia for :  8  clusters is:  554.0
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\12032\Downloads\WPy64-31050\python-3.10.5.amd64\lib\site-packages\sklearn\cluster\_kmeans.py:1332: UserWarning: KMeans is known to have a memory leak on Windows with MKL, when there are less chunks than available threads. You can avoid it by setting the environment variable OMP_NUM_THREADS=1.
-  warnings.warn(
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The inertia for :  9  clusters is:  542.8396681749623
-The inertia for :  10  clusters is:  532.5109100050277
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\12032\Downloads\WPy64-31050\python-3.10.5.amd64\lib\site-packages\sklearn\cluster\_kmeans.py:1332: UserWarning: KMeans is known to have a memory leak on Windows with MKL, when there are less chunks than available threads. You can avoid it by setting the environment variable OMP_NUM_THREADS=1.
-  warnings.warn(
-C:\Users\12032\Downloads\WPy64-31050\python-3.10.5.amd64\lib\site-packages\sklearn\cluster\_kmeans.py:1332: UserWarning: KMeans is known to have a memory leak on Windows with MKL, when there are less chunks than available threads. You can avoid it by setting the environment variable OMP_NUM_THREADS=1.
-  warnings.warn(
-C:\Users\12032\Downloads\WPy64-31050\python-3.10.5.amd64\lib\site-packages\sklearn\cluster\_kmeans.py:1332: UserWarning: KMeans is known to have a memory leak on Windows with MKL, when there are less chunks than available threads. You can avoid it by setting the environment variable OMP_NUM_THREADS=1.
-  warnings.warn(
-C:\Users\12032\Downloads\WPy64-31050\python-3.10.5.amd64\lib\site-packages\sklearn\cluster\_kmeans.py:1332: UserWarning: KMeans is known to have a memory leak on Windows with MKL, when there are less chunks than available threads. You can avoid it by setting the environment variable OMP_NUM_THREADS=1.
-  warnings.warn(
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The inertia for :  11  clusters is:  512.9895881895881
-The inertia for :  12  clusters is:  502.0277972027973
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The inertia for :  13  clusters is:  485.459706959707
-The inertia for :  14  clusters is:  476.71947496947496
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The inertia for :  15  clusters is:  469.267316017316
-The inertia for :  16  clusters is:  454.58982683982674
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\12032\Downloads\WPy64-31050\python-3.10.5.amd64\lib\site-packages\sklearn\cluster\_kmeans.py:1332: UserWarning: KMeans is known to have a memory leak on Windows with MKL, when there are less chunks than available threads. You can avoid it by setting the environment variable OMP_NUM_THREADS=1.
-  warnings.warn(
-C:\Users\12032\Downloads\WPy64-31050\python-3.10.5.amd64\lib\site-packages\sklearn\cluster\_kmeans.py:1332: UserWarning: KMeans is known to have a memory leak on Windows with MKL, when there are less chunks than available threads. You can avoid it by setting the environment variable OMP_NUM_THREADS=1.
-  warnings.warn(
-C:\Users\12032\Downloads\WPy64-31050\python-3.10.5.amd64\lib\site-packages\sklearn\cluster\_kmeans.py:1332: UserWarning: KMeans is known to have a memory leak on Windows with MKL, when there are less chunks than available threads. You can avoid it by setting the environment variable OMP_NUM_THREADS=1.
-  warnings.warn(
-C:\Users\12032\Downloads\WPy64-31050\python-3.10.5.amd64\lib\site-packages\sklearn\cluster\_kmeans.py:1332: UserWarning: KMeans is known to have a memory leak on Windows with MKL, when there are less chunks than available threads. You can avoid it by setting the environment variable OMP_NUM_THREADS=1.
-  warnings.warn(
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The inertia for :  17  clusters is:  442.4626984126984
-The inertia for :  18  clusters is:  437.26190476190476
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The inertia for :  19  clusters is:  425.5873626373626
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\12032\Downloads\WPy64-31050\python-3.10.5.amd64\lib\site-packages\sklearn\cluster\_kmeans.py:1332: UserWarning: KMeans is known to have a memory leak on Windows with MKL, when there are less chunks than available threads. You can avoid it by setting the environment variable OMP_NUM_THREADS=1.
-  warnings.warn(
-C:\Users\12032\Downloads\WPy64-31050\python-3.10.5.amd64\lib\site-packages\sklearn\cluster\_kmeans.py:1332: UserWarning: KMeans is known to have a memory leak on Windows with MKL, when there are less chunks than available threads. You can avoid it by setting the environment variable OMP_NUM_THREADS=1.
-  warnings.warn(
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="nn">~\AppData\Local\Temp\ipykernel_4332\2719671876.py</span> in <span class="ni">&lt;cell line: 6&gt;</span><span class="nt">()</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="k">for</span> <span class="n">num</span> <span class="ow">in</span> <span class="n">number_clust</span><span class="p">:</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span>     <span class="n">kmeans</span> <span class="o">=</span> <span class="n">KMeans</span><span class="p">(</span><span class="n">n_clusters</span> <span class="o">=</span> <span class="n">num</span><span class="p">,</span><span class="n">random_state</span> <span class="o">=</span> <span class="mi">300</span><span class="p">)</span> <span class="c1">#Creates Clusters and fits data</span>
+<span class="ne">----&gt; </span><span class="mi">8</span>     <span class="n">kmeans</span> <span class="o">=</span> <span class="n">kmeans</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">9</span>     <span class="n">u</span> <span class="o">=</span> <span class="n">kmeans</span><span class="o">.</span><span class="n">inertia_</span>
+<span class="g g-Whitespace">     </span><span class="mi">10</span>     <span class="n">inertia</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">u</span><span class="p">)</span>
+
+<span class="ne">NameError</span>: name &#39;X_train&#39; is not defined
 </pre></div>
 </div>
 </div>
@@ -2114,6 +2101,12 @@ C:\Users\12032\Downloads\WPy64-31050\python-3.10.5.amd64\lib\site-packages\sklea
 </div>
 </div>
 </div>
+</section>
+<section id="data-train-and-evaluation">
+<h2>Data Train and Evaluation<a class="headerlink" href="#data-train-and-evaluation" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Once the ideal number of clusters is created, you can train your data in respect to the number of clusters “In this case 5” and test how accurate the clustering was. compare the “.fit().labels_()” to the predictions “.predict()”.</p></li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">kmeans</span> <span class="o">=</span> <span class="n">KMeans</span><span class="p">(</span><span class="n">n_clusters</span> <span class="o">=</span> <span class="mi">5</span> <span class="p">,</span><span class="n">random_state</span> <span class="o">=</span> <span class="mi">2</span><span class="p">)</span> <span class="c1">#Creates Clusters and fits data</span>
@@ -2207,230 +2200,13 @@ C:\Users\12032\Downloads\WPy64-31050\python-3.10.5.amd64\lib\site-packages\sklea
 </div>
 </div>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X</span> <span class="o">=</span> <span class="n">X_train</span>
-<span class="n">y</span> <span class="o">=</span> <span class="n">predictions</span>
-
-<span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Cluster 0&#39;</span><span class="p">,</span> <span class="s1">&#39;Cluster 1&#39;</span><span class="p">,</span> <span class="s1">&#39;Cluster 2&#39;</span><span class="p">,</span> <span class="s1">&#39;Cluster 3&#39;</span><span class="p">,</span> <span class="s1">&#39;Cluster 4&#39;</span><span class="p">]</span>
-
-<span class="c1">#Creates PCA models and fits data to that model</span>
-<span class="n">pca</span> <span class="o">=</span> <span class="n">PCA</span><span class="p">(</span><span class="n">n_components</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="n">random_state</span> <span class="o">=</span> <span class="mi">300</span><span class="p">)</span> 
-<span class="n">X_plot</span> <span class="o">=</span> <span class="n">pca</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">)</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
-
-<span class="c1">#Finds the explained variance, or the total variance from each of the componants</span>
-<span class="n">variance</span> <span class="o">=</span> <span class="n">pca</span><span class="o">.</span><span class="n">explained_variance_ratio_</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The explained variance for the two componants are : </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">variance</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The explained variance for the two componants are : [0.12097476 0.07892549]
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
-<span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="s1">&#39;navy&#39;</span><span class="p">,</span> <span class="s1">&#39;orange&#39;</span><span class="p">]</span>
-<span class="n">line_width</span> <span class="o">=</span> <span class="mi">10</span>
-
-<span class="k">for</span> <span class="n">color</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">names</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">colors</span><span class="p">,[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">],</span> <span class="n">names</span><span class="p">):</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X_plot</span><span class="p">[</span><span class="n">y</span> <span class="o">==</span> <span class="n">i</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span><span class="n">X_plot</span><span class="p">[</span><span class="n">y</span> <span class="o">==</span> <span class="n">i</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span><span class="n">color</span> <span class="o">=</span> <span class="n">color</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">.8</span><span class="p">,</span> <span class="n">lw</span> <span class="o">=</span> <span class="n">line_width</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="n">names</span><span class="p">)</span>
-
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span> <span class="o">=</span> <span class="s1">&#39;best&#39;</span><span class="p">,</span> <span class="n">shadow</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">scatterpoints</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">bbox_to_anchor</span> <span class="o">=</span> <span class="p">(</span><span class="mf">1.05</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">loc</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="n">borderaxespad</span> <span class="o">=</span> <span class="mf">.6</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;PCA Analysis of Breeds&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;PCA Analysis of Breeds&#39;)
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Figure size 432x288 with 0 Axes&gt;
-</pre></div>
-</div>
-<img alt="_images/f778e9279d8be03b97aac704c7874381c55e8052d07d96014be4845dc934641b.png" src="_images/f778e9279d8be03b97aac704c7874381c55e8052d07d96014be4845dc934641b.png" />
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X</span><span class="o">.</span><span class="n">shape</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(97, 74)
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n_componants</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-
-<span class="n">pca</span> <span class="o">=</span> <span class="n">PCA</span><span class="p">(</span><span class="n">n_components</span> <span class="o">=</span> <span class="n">n_componants</span><span class="p">,</span> <span class="n">random_state</span> <span class="o">=</span> <span class="mi">300</span><span class="p">)</span> 
-<span class="n">X_r</span> <span class="o">=</span> <span class="n">pca</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">)</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
-
-<span class="n">total_variance</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">pca</span><span class="o">.</span><span class="n">explained_variance_</span><span class="p">)</span>
-<span class="n">total_variance_95</span> <span class="o">=</span> <span class="n">total_variance</span> <span class="o">*</span> <span class="mf">.95</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Total Variance is = &quot;</span><span class="p">,</span> <span class="n">total_variance</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The total 95</span><span class="si">% c</span><span class="s2">onfidence is = &quot;</span><span class="p">,</span> <span class="n">total_variance_95</span><span class="p">)</span>
-
-<span class="n">a</span> <span class="o">=</span> <span class="nb">zip</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">n_componants</span><span class="p">),</span> <span class="n">pca</span><span class="o">.</span><span class="n">explained_variance_</span><span class="p">)</span>
-<span class="n">a</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;PCA Comp&#39;</span><span class="p">,</span><span class="s1">&#39;Explained Variance&#39;</span><span class="p">])</span>
-
-<span class="c1"># Hitting the 95% confidence</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The total variance for 10 componants is : &quot;</span><span class="p">,</span> <span class="nb">sum</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="s2">&quot;Explained Variance&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">:</span><span class="mi">10</span><span class="p">]))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The total variance for 20 componants is : &quot;</span><span class="p">,</span> <span class="nb">sum</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="s2">&quot;Explained Variance&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">:</span><span class="mi">20</span><span class="p">]))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The total variance for 30 componants is : &quot;</span><span class="p">,</span> <span class="nb">sum</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="s2">&quot;Explained Variance&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">:</span><span class="mi">30</span><span class="p">]))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The total variance for 40 componants is : &quot;</span><span class="p">,</span> <span class="nb">sum</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="s2">&quot;Explained Variance&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">:</span><span class="mi">40</span><span class="p">]))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The total variance for 35 componants is : &quot;</span><span class="p">,</span> <span class="nb">sum</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="s2">&quot;Explained Variance&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">:</span><span class="mi">35</span><span class="p">]))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The total variance for 31 componants is : &quot;</span><span class="p">,</span> <span class="nb">sum</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="s2">&quot;Explained Variance&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">:</span><span class="mi">31</span><span class="p">]))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Total Variance is =  8.146477663230234
-The total 95% confidence is =  7.7391537800687225
-The total variance for 10 componants is :  4.913637381876681
-The total variance for 20 componants is :  6.889244712115357
-The total variance for 30 componants is :  7.71494682915926
-The total variance for 40 componants is :  8.037360371863318
-The total variance for 35 componants is :  7.915256024403109
-The total variance for 31 componants is :  7.763738849757528
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">14</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">pca</span><span class="o">.</span><span class="n">explained_variance_ratio_</span><span class="p">,</span><span class="n">lw</span> <span class="o">=</span> <span class="mi">2</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;n_components&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;explained vairance&quot;</span><span class="p">)</span>
-
-<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="mi">35</span><span class="p">,</span><span class="n">linestyle</span> <span class="o">=</span> <span class="s2">&quot;:&quot;</span><span class="p">,</span><span class="n">label</span> <span class="o">=</span> <span class="s2">&quot;95% Confidence Line&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;function matplotlib.pyplot.legend(*args, **kwargs)&gt;
-</pre></div>
-</div>
-<img alt="_images/5ef46f8af4edddb9f078ea9f419ab57823b4cc6356f6177a4aea70998a1b929a.png" src="_images/5ef46f8af4edddb9f078ea9f419ab57823b4cc6356f6177a4aea70998a1b929a.png" />
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pca</span> <span class="o">=</span> <span class="n">PCA</span><span class="p">(</span><span class="n">n_components</span> <span class="o">=</span> <span class="mi">35</span><span class="p">,</span> <span class="n">random_state</span> <span class="o">=</span> <span class="mi">300</span><span class="p">)</span> 
-<span class="n">X_plot</span> <span class="o">=</span> <span class="n">pca</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">)</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
-
-<span class="n">number_clust</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">20</span><span class="p">)</span>
-<span class="n">inertia</span> <span class="o">=</span> <span class="p">[]</span>
-
-<span class="k">for</span> <span class="n">num</span> <span class="ow">in</span> <span class="n">number_clust</span><span class="p">:</span>
-    <span class="n">kmeans</span> <span class="o">=</span> <span class="n">KMeans</span><span class="p">(</span><span class="n">n_clusters</span> <span class="o">=</span> <span class="n">num</span><span class="p">,</span><span class="n">random_state</span> <span class="o">=</span> <span class="mi">300</span><span class="p">)</span> <span class="c1">#Creates Clusters and fits data</span>
-    <span class="n">kmeans</span> <span class="o">=</span> <span class="n">kmeans</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_plot</span><span class="p">)</span>
-    <span class="n">u</span> <span class="o">=</span> <span class="n">kmeans</span><span class="o">.</span><span class="n">inertia_</span>
-    <span class="n">inertia</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">u</span><span class="p">)</span>
-    
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The inertia for : &#39;</span><span class="p">,</span> <span class="n">num</span><span class="p">,</span> <span class="s1">&#39; clusters is: &#39;</span><span class="p">,</span> <span class="n">u</span><span class="p">)</span>
-    
-<span class="n">fig</span><span class="p">,</span> <span class="p">(</span><span class="n">ax1</span><span class="p">)</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">16</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
-<span class="n">x_axis</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">number_clust</span><span class="p">))</span>
-<span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_axis</span><span class="p">,</span> <span class="n">inertia</span><span class="p">)</span>
-<span class="n">ax1</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="n">x_axis</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Inertia Vs Clusters&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Inertia&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Number of clusters&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\12032\Downloads\WPy64-31050\python-3.10.5.amd64\lib\site-packages\sklearn\cluster\_kmeans.py:1332: UserWarning: KMeans is known to have a memory leak on Windows with MKL, when there are less chunks than available threads. You can avoid it by setting the environment variable OMP_NUM_THREADS=1.
-  warnings.warn(
-C:\Users\12032\Downloads\WPy64-31050\python-3.10.5.amd64\lib\site-packages\sklearn\cluster\_kmeans.py:1332: UserWarning: KMeans is known to have a memory leak on Windows with MKL, when there are less chunks than available threads. You can avoid it by setting the environment variable OMP_NUM_THREADS=1.
-  warnings.warn(
-C:\Users\12032\Downloads\WPy64-31050\python-3.10.5.amd64\lib\site-packages\sklearn\cluster\_kmeans.py:1332: UserWarning: KMeans is known to have a memory leak on Windows with MKL, when there are less chunks than available threads. You can avoid it by setting the environment variable OMP_NUM_THREADS=1.
-  warnings.warn(
-C:\Users\12032\Downloads\WPy64-31050\python-3.10.5.amd64\lib\site-packages\sklearn\cluster\_kmeans.py:1332: UserWarning: KMeans is known to have a memory leak on Windows with MKL, when there are less chunks than available threads. You can avoid it by setting the environment variable OMP_NUM_THREADS=1.
-  warnings.warn(
-C:\Users\12032\Downloads\WPy64-31050\python-3.10.5.amd64\lib\site-packages\sklearn\cluster\_kmeans.py:1332: UserWarning: KMeans is known to have a memory leak on Windows with MKL, when there are less chunks than available threads. You can avoid it by setting the environment variable OMP_NUM_THREADS=1.
-  warnings.warn(
-C:\Users\12032\Downloads\WPy64-31050\python-3.10.5.amd64\lib\site-packages\sklearn\cluster\_kmeans.py:1332: UserWarning: KMeans is known to have a memory leak on Windows with MKL, when there are less chunks than available threads. You can avoid it by setting the environment variable OMP_NUM_THREADS=1.
-  warnings.warn(
-C:\Users\12032\Downloads\WPy64-31050\python-3.10.5.amd64\lib\site-packages\sklearn\cluster\_kmeans.py:1332: UserWarning: KMeans is known to have a memory leak on Windows with MKL, when there are less chunks than available threads. You can avoid it by setting the environment variable OMP_NUM_THREADS=1.
-  warnings.warn(
-C:\Users\12032\Downloads\WPy64-31050\python-3.10.5.amd64\lib\site-packages\sklearn\cluster\_kmeans.py:1332: UserWarning: KMeans is known to have a memory leak on Windows with MKL, when there are less chunks than available threads. You can avoid it by setting the environment variable OMP_NUM_THREADS=1.
-  warnings.warn(
-C:\Users\12032\Downloads\WPy64-31050\python-3.10.5.amd64\lib\site-packages\sklearn\cluster\_kmeans.py:1332: UserWarning: KMeans is known to have a memory leak on Windows with MKL, when there are less chunks than available threads. You can avoid it by setting the environment variable OMP_NUM_THREADS=1.
-  warnings.warn(
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The inertia for :  2  clusters is:  683.9686985666417
-The inertia for :  3  clusters is:  648.748967999286
-The inertia for :  4  clusters is:  622.5060165040745
-The inertia for :  5  clusters is:  594.7023134977513
-The inertia for :  6  clusters is:  576.9548773881804
-The inertia for :  7  clusters is:  554.3391282784729
-The inertia for :  8  clusters is:  540.2525579571168
-The inertia for :  9  clusters is:  524.3338375888897
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The inertia for :  10  clusters is:  507.16609508561555
-The inertia for :  11  clusters is:  490.9708996309377
-The inertia for :  12  clusters is:  480.46813833419753
-The inertia for :  13  clusters is:  466.4430095650345
-The inertia for :  14  clusters is:  451.59092414194106
-The inertia for :  15  clusters is:  441.48485200389155
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\12032\Downloads\WPy64-31050\python-3.10.5.amd64\lib\site-packages\sklearn\cluster\_kmeans.py:1332: UserWarning: KMeans is known to have a memory leak on Windows with MKL, when there are less chunks than available threads. You can avoid it by setting the environment variable OMP_NUM_THREADS=1.
-  warnings.warn(
-C:\Users\12032\Downloads\WPy64-31050\python-3.10.5.amd64\lib\site-packages\sklearn\cluster\_kmeans.py:1332: UserWarning: KMeans is known to have a memory leak on Windows with MKL, when there are less chunks than available threads. You can avoid it by setting the environment variable OMP_NUM_THREADS=1.
-  warnings.warn(
-C:\Users\12032\Downloads\WPy64-31050\python-3.10.5.amd64\lib\site-packages\sklearn\cluster\_kmeans.py:1332: UserWarning: KMeans is known to have a memory leak on Windows with MKL, when there are less chunks than available threads. You can avoid it by setting the environment variable OMP_NUM_THREADS=1.
-  warnings.warn(
-C:\Users\12032\Downloads\WPy64-31050\python-3.10.5.amd64\lib\site-packages\sklearn\cluster\_kmeans.py:1332: UserWarning: KMeans is known to have a memory leak on Windows with MKL, when there are less chunks than available threads. You can avoid it by setting the environment variable OMP_NUM_THREADS=1.
-  warnings.warn(
-C:\Users\12032\Downloads\WPy64-31050\python-3.10.5.amd64\lib\site-packages\sklearn\cluster\_kmeans.py:1332: UserWarning: KMeans is known to have a memory leak on Windows with MKL, when there are less chunks than available threads. You can avoid it by setting the environment variable OMP_NUM_THREADS=1.
-  warnings.warn(
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\12032\Downloads\WPy64-31050\python-3.10.5.amd64\lib\site-packages\sklearn\cluster\_kmeans.py:1332: UserWarning: KMeans is known to have a memory leak on Windows with MKL, when there are less chunks than available threads. You can avoid it by setting the environment variable OMP_NUM_THREADS=1.
-  warnings.warn(
-C:\Users\12032\Downloads\WPy64-31050\python-3.10.5.amd64\lib\site-packages\sklearn\cluster\_kmeans.py:1332: UserWarning: KMeans is known to have a memory leak on Windows with MKL, when there are less chunks than available threads. You can avoid it by setting the environment variable OMP_NUM_THREADS=1.
-  warnings.warn(
-C:\Users\12032\Downloads\WPy64-31050\python-3.10.5.amd64\lib\site-packages\sklearn\cluster\_kmeans.py:1332: UserWarning: KMeans is known to have a memory leak on Windows with MKL, when there are less chunks than available threads. You can avoid it by setting the environment variable OMP_NUM_THREADS=1.
-  warnings.warn(
-C:\Users\12032\Downloads\WPy64-31050\python-3.10.5.amd64\lib\site-packages\sklearn\cluster\_kmeans.py:1332: UserWarning: KMeans is known to have a memory leak on Windows with MKL, when there are less chunks than available threads. You can avoid it by setting the environment variable OMP_NUM_THREADS=1.
-  warnings.warn(
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The inertia for :  16  clusters is:  431.5303585342292
-The inertia for :  17  clusters is:  424.16966739605215
-The inertia for :  18  clusters is:  415.43433746938075
-The inertia for :  19  clusters is:  403.3348441663658
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 0, &#39;Number of clusters&#39;)
-</pre></div>
-</div>
-<img alt="_images/ae590d910e15905ec3d32ed0daaee4cd5ece22fc98a9c713713f6914ddec5050.png" src="_images/ae590d910e15905ec3d32ed0daaee4cd5ece22fc98a9c713713f6914ddec5050.png" />
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">###################################### K MEANS CLUSTERING #####################################</span>
-</pre></div>
-</div>
-</div>
-</div>
+</section>
+<section id="final-clustering-and-data-analysis">
+<h2>Final Clustering and Data Analysis<a class="headerlink" href="#final-clustering-and-data-analysis" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>A Final PCA and Clustering was done on this numerical data, which is easier for visualization through PCA and graphs</p></li>
+<li><p>First the data needed to be loaded in and the columns needed to be separated to a new dataframe of only the required analysis columns.</p></li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">batch_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;C:\Users\12032\Documents\Uconn\Semester 8\Six Sigma\Batch_Data.csv&#39;</span><span class="p">)</span>
@@ -2691,39 +2467,6 @@ The inertia for :  19  clusters is:  403.3348441663658
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">batch_data</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">bins</span> <span class="o">=</span> <span class="mi">10</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[&lt;AxesSubplot:title={&#39;center&#39;:&#39;Infill&#39;}&gt;,
-        &lt;AxesSubplot:title={&#39;center&#39;:&#39;Temperature (C)&#39;}&gt;,
-        &lt;AxesSubplot:title={&#39;center&#39;:&#39;Weight (g)&#39;}&gt;],
-       [&lt;AxesSubplot:title={&#39;center&#39;:&#39;Heights (mm)&#39;}&gt;,
-        &lt;AxesSubplot:title={&#39;center&#39;:&#39;Width&#39;}&gt;,
-        &lt;AxesSubplot:title={&#39;center&#39;:&#39;Length Between (mm)&#39;}&gt;],
-       [&lt;AxesSubplot:title={&#39;center&#39;:&#39;Marker Size&#39;}&gt;, &lt;AxesSubplot:&gt;,
-        &lt;AxesSubplot:&gt;]], dtype=object)
-</pre></div>
-</div>
-<img alt="_images/98409cb70de2b987cdba4362fbe6baef605ba982380bc701d2f3f44d17ddb5ab.png" src="_images/98409cb70de2b987cdba4362fbe6baef605ba982380bc701d2f3f44d17ddb5ab.png" />
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">batch_data</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span> <span class="o">=</span> <span class="s1">&#39;scatter&#39;</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="s1">&#39;Weight (g)&#39;</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="s1">&#39;Heights (mm)&#39;</span><span class="p">,</span><span class="n">c</span> <span class="o">=</span> <span class="s1">&#39;blue&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;Weight (g)&#39;, ylabel=&#39;Heights (mm)&#39;&gt;
-</pre></div>
-</div>
-<img alt="_images/dce50e7f324566a9191d4ba736cc63d830fa8ab3623d2e4c68db9c9df481833f.png" src="_images/dce50e7f324566a9191d4ba736cc63d830fa8ab3623d2e4c68db9c9df481833f.png" />
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Weight</span> <span class="o">=</span> <span class="n">batch_data</span><span class="p">[</span><span class="s1">&#39;Weight (g)&#39;</span><span class="p">]</span>
 <span class="n">Height</span> <span class="o">=</span> <span class="n">batch_data</span><span class="p">[</span><span class="s1">&#39;Heights (mm)&#39;</span><span class="p">]</span>
 <span class="n">Width</span> <span class="o">=</span> <span class="n">batch_data</span><span class="p">[</span><span class="s1">&#39;Width&#39;</span><span class="p">]</span>
@@ -2736,38 +2479,27 @@ The inertia for :  19  clusters is:  403.3348441663658
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span>
-<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">axes</span><span class="p">(</span><span class="n">projection</span> <span class="o">=</span><span class="s2">&quot;3d&quot;</span><span class="p">)</span>
-
-<span class="n">ax</span><span class="o">.</span><span class="n">scatter3D</span><span class="p">(</span><span class="n">Height</span><span class="p">,</span><span class="n">Width</span><span class="p">,</span><span class="n">Weight</span><span class="p">,</span><span class="n">marker</span> <span class="o">=</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">s</span> <span class="o">=</span> <span class="n">batch_data</span><span class="p">[</span><span class="s1">&#39;Marker Size&#39;</span><span class="p">],</span> <span class="n">c</span> <span class="o">=</span><span class="n">batch_data</span><span class="p">[</span><span class="s1">&#39;Unnamed: 4&#39;</span><span class="p">])</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Height (mm)&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Width (mm)&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_zlabel</span><span class="p">(</span><span class="s1">&#39;Weight (g)&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 0, &#39;Weight (g)&#39;)
-</pre></div>
-</div>
-<img alt="_images/7eba985e0a11ecaa59b9f6aac12f6ed491e87d181aadf67522c21c9f202c09b9.png" src="_images/7eba985e0a11ecaa59b9f6aac12f6ed491e87d181aadf67522c21c9f202c09b9.png" />
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">&quot;Weight&quot;</span><span class="p">:</span> <span class="n">Weight</span><span class="p">,</span> <span class="s2">&quot;Feet&quot;</span><span class="p">:</span> <span class="n">Feet</span><span class="p">,</span> <span class="s2">&quot;Height&quot;</span><span class="p">:</span> <span class="n">Height</span><span class="p">,</span> <span class="s2">&quot;Width&quot;</span><span class="p">:</span> <span class="n">Width</span><span class="p">,</span> <span class="s2">&quot;Temp&quot;</span><span class="p">:</span> <span class="n">Temperature</span><span class="p">,</span> <span class="s2">&quot;Infill&quot;</span><span class="p">:</span> <span class="n">Infill</span><span class="p">})</span> <span class="c1">#Creates new df</span>
 <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">&quot;Weight&quot;</span><span class="p">:</span> <span class="n">Weight</span><span class="p">,</span> <span class="s2">&quot;Feet&quot;</span><span class="p">:</span> <span class="n">Feet</span><span class="p">,</span> <span class="s2">&quot;Height&quot;</span><span class="p">:</span> <span class="n">Height</span><span class="p">,</span> <span class="s2">&quot;Width&quot;</span><span class="p">:</span> <span class="n">Width</span><span class="p">})</span>
 </pre></div>
 </div>
 </div>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">######################### PCA PLOTTING #############################</span>
+</section>
+<section id="pca-was-run-with-4-components-to-see-which-had-the-largest-effect-on-the-data">
+<h2>PCA was run with 4 components to see which had the largest effect on the data<a class="headerlink" href="#pca-was-run-with-4-components-to-see-which-had-the-largest-effect-on-the-data" title="Permalink to this heading">#</a></h2>
+<ul>
+<li><p>The pca had to be initialized through “PCA(n_components = 4)” and then fit and transformed through “.fit().transform()”.</p></li>
+<li><p>Once the data was fit to the PCA, you can check which components had the biggest effect on the variance for each principle component using “.components_”</p>
+<ul>
+<li><p>Put into a nice plot using the below function:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>          df_Explained_VAR = pd.DataFrame(abs(pca.components_) * 100, columns=list(df.columns))
 </pre></div>
 </div>
-</div>
-</div>
+</li>
+</ul>
+</li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pca</span> <span class="o">=</span> <span class="n">PCA</span><span class="p">(</span><span class="n">n_components</span> <span class="o">=</span> <span class="mi">4</span><span class="p">)</span>
@@ -2862,6 +2594,20 @@ The inertia for :  19  clusters is:  403.3348441663658
 </table>
 </div></div></div>
 </div>
+</section>
+<section id="plotting-pca">
+<h2>Plotting PCA<a class="headerlink" href="#plotting-pca" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>To plot, you must import from two different libraries:
+(from sklearn import datasets)
+and
+(from plotly.express as px)</p></li>
+<li><p>After definign the features, you can use both these libraries to create a nice plot showing each principle component vs another and their respective coorelation.</p>
+<ul>
+<li><p>For example, PCA 1 - PCA 1 shows a straight line as they are perfectly coorelated</p></li>
+</ul>
+</li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">datasets</span>
@@ -2982,9 +2728,9 @@ e.exports=function(t){return null!=t&&(n(t)||function(t){return"function"==typeo
         });
         }
         </script>
-        </div><div class="output text_html"><div>                            <div id="e26fa1cc-1789-4f66-8dbd-a7b2e72e7177" class="plotly-graph-div" style="height:525px; width:100%;"></div>            <script type="text/javascript">                require(["plotly"], function(Plotly) {                    window.PLOTLYENV=window.PLOTLYENV || {};                                    if (document.getElementById("e26fa1cc-1789-4f66-8dbd-a7b2e72e7177")) {                    Plotly.newPlot(                        "e26fa1cc-1789-4f66-8dbd-a7b2e72e7177",                        [{"dimensions":[{"axis":{"matches":true},"label":"PC 1 (74.8%)","values":[1.5882606360113596,-1.2262931755301176,-1.8891461390570432,-1.0628005031100474,0.2337052906344362,2.2500794876354355,0.6757196150858875,-1.0207968025484242]},{"axis":{"matches":true},"label":"PC 2 (20.8%)","values":[0.06522686656327566,-0.2985439254422978,0.5915805486788963,-0.705518147091979,1.6899986636399336,-1.005180588196383,0.7260694152951993,-0.9439977739184002]},{"axis":{"matches":true},"label":"PC 3 (4.2%)","values":[-0.030897432584074503,0.05534470498475007,0.042511425908673746,-0.42635091001487624,-0.03465505511097459,-0.15067901421206883,0.20237781918359768,-0.31982529808329224]},{"axis":{"matches":true},"label":"PC 4 (0.3%)","values":[-0.060848585725878895,0.04073855188779411,0.056220033154262355,0.037352777572996924,0.08975786834578584,0.0067980042298577915,-0.003939290997179423,0.010604866804852961]}],"hovertemplate":"color=b<br>%{xaxis.title.text}=%{x}<br>%{yaxis.title.text}=%{y}<extra></extra>","legendgroup":"b","marker":{"color":"#636efa","symbol":"circle"},"name":"b","showlegend":true,"type":"splom"},{"dimensions":[{"axis":{"matches":true},"label":"PC 1 (74.8%)","values":[-1.1896866398110109,1.4042593536920516,0.6003869596595169,2.7913035956239005,-1.7318998545809254,-1.0955245518919048,0.732256953675542,-1.0598242254886654]},{"axis":{"matches":true},"label":"PC 2 (20.8%)","values":[-0.3529650428243609,0.15452178701411728,0.924434724175665,-0.4710046530215321,0.7421774998896639,-0.8328828167265985,0.2820221653876499,-0.5659387234228137]},{"axis":{"matches":true},"label":"PC 3 (4.2%)","values":[-0.046673239045374786,-0.049415866508996625,0.17251210038212067,0.02459814847291919,-0.26769327253034686,1.1336586745335213,-0.04187638696582264,-0.26293639840976907]},{"axis":{"matches":true},"label":"PC 4 (0.3%)","values":[-0.11447305406162807,-0.1504421842220699,-0.0806480525543868,0.20176069669501415,0.06915097940088331,0.01792409575140345,-0.08799553391260996,-0.031961172369049703]}],"hovertemplate":"color=y<br>%{xaxis.title.text}=%{x}<br>%{yaxis.title.text}=%{y}<extra></extra>","legendgroup":"y","marker":{"color":"#EF553B","symbol":"circle"},"name":"y","showlegend":true,"type":"splom"}],                        {"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmapgl":[{"type":"heatmapgl","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermapbox":[{"type":"scattermapbox","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"mapbox":{"style":"light"}}},"legend":{"title":{"text":"color"},"tracegroupgap":0},"margin":{"t":60},"dragmode":"select"},                        {"responsive": true}                    ).then(function(){
+        </div><div class="output text_html"><div>                            <div id="223fb67e-12b9-4f1a-951d-0327a236177d" class="plotly-graph-div" style="height:525px; width:100%;"></div>            <script type="text/javascript">                require(["plotly"], function(Plotly) {                    window.PLOTLYENV=window.PLOTLYENV || {};                                    if (document.getElementById("223fb67e-12b9-4f1a-951d-0327a236177d")) {                    Plotly.newPlot(                        "223fb67e-12b9-4f1a-951d-0327a236177d",                        [{"dimensions":[{"axis":{"matches":true},"label":"PC 1 (74.8%)","values":[1.5882606360113596,-1.2262931755301176,-1.8891461390570432,-1.0628005031100474,0.2337052906344362,2.2500794876354355,0.6757196150858875,-1.0207968025484242]},{"axis":{"matches":true},"label":"PC 2 (20.8%)","values":[0.06522686656327566,-0.2985439254422978,0.5915805486788963,-0.705518147091979,1.6899986636399336,-1.005180588196383,0.7260694152951993,-0.9439977739184002]},{"axis":{"matches":true},"label":"PC 3 (4.2%)","values":[-0.030897432584074503,0.05534470498475007,0.042511425908673746,-0.42635091001487624,-0.03465505511097459,-0.15067901421206883,0.20237781918359768,-0.31982529808329224]},{"axis":{"matches":true},"label":"PC 4 (0.3%)","values":[-0.060848585725878895,0.04073855188779411,0.056220033154262355,0.037352777572996924,0.08975786834578584,0.0067980042298577915,-0.003939290997179423,0.010604866804852961]}],"hovertemplate":"color=b<br>%{xaxis.title.text}=%{x}<br>%{yaxis.title.text}=%{y}<extra></extra>","legendgroup":"b","marker":{"color":"#636efa","symbol":"circle"},"name":"b","showlegend":true,"type":"splom"},{"dimensions":[{"axis":{"matches":true},"label":"PC 1 (74.8%)","values":[-1.1896866398110109,1.4042593536920516,0.6003869596595169,2.7913035956239005,-1.7318998545809254,-1.0955245518919048,0.732256953675542,-1.0598242254886654]},{"axis":{"matches":true},"label":"PC 2 (20.8%)","values":[-0.3529650428243609,0.15452178701411728,0.924434724175665,-0.4710046530215321,0.7421774998896639,-0.8328828167265985,0.2820221653876499,-0.5659387234228137]},{"axis":{"matches":true},"label":"PC 3 (4.2%)","values":[-0.046673239045374786,-0.049415866508996625,0.17251210038212067,0.02459814847291919,-0.26769327253034686,1.1336586745335213,-0.04187638696582264,-0.26293639840976907]},{"axis":{"matches":true},"label":"PC 4 (0.3%)","values":[-0.11447305406162807,-0.1504421842220699,-0.0806480525543868,0.20176069669501415,0.06915097940088331,0.01792409575140345,-0.08799553391260996,-0.031961172369049703]}],"hovertemplate":"color=y<br>%{xaxis.title.text}=%{x}<br>%{yaxis.title.text}=%{y}<extra></extra>","legendgroup":"y","marker":{"color":"#EF553B","symbol":"circle"},"name":"y","showlegend":true,"type":"splom"}],                        {"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmapgl":[{"type":"heatmapgl","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermapbox":[{"type":"scattermapbox","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"mapbox":{"style":"light"}}},"legend":{"title":{"text":"color"},"tracegroupgap":0},"margin":{"t":60},"dragmode":"select"},                        {"responsive": true}                    ).then(function(){
                             
-var gd = document.getElementById('e26fa1cc-1789-4f66-8dbd-a7b2e72e7177');
+var gd = document.getElementById('223fb67e-12b9-4f1a-951d-0327a236177d');
 var x = new MutationObserver(function (mutations, observer) {{
         var display = window.getComputedStyle(gd).display;
         if (!display || display === 'none') {{
@@ -3008,39 +2754,15 @@ if (outputEl) {{
 
                         })                };                });            </script>        </div></div></div>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">px</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">components</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>                            <div id="fe6d51f7-754d-45ca-8ff3-1ee41a013d7b" class="plotly-graph-div" style="height:525px; width:100%;"></div>            <script type="text/javascript">                require(["plotly"], function(Plotly) {                    window.PLOTLYENV=window.PLOTLYENV || {};                                    if (document.getElementById("fe6d51f7-754d-45ca-8ff3-1ee41a013d7b")) {                    Plotly.newPlot(                        "fe6d51f7-754d-45ca-8ff3-1ee41a013d7b",                        [{"hovertemplate":"variable=0<br>index=%{x}<br>value=%{y}<extra></extra>","legendgroup":"0","marker":{"color":"#636efa","symbol":"circle"},"mode":"markers","name":"0","orientation":"v","showlegend":true,"x":[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15],"xaxis":"x","y":[1.5882606360113596,-1.2262931755301176,-1.1896866398110109,1.4042593536920516,0.6003869596595169,-1.8891461390570432,2.7913035956239005,-1.0628005031100474,-1.7318998545809254,0.2337052906344362,2.2500794876354355,0.6757196150858875,-1.0955245518919048,-1.0207968025484242,0.732256953675542,-1.0598242254886654],"yaxis":"y","type":"scatter"},{"hovertemplate":"variable=1<br>index=%{x}<br>value=%{y}<extra></extra>","legendgroup":"1","marker":{"color":"#EF553B","symbol":"circle"},"mode":"markers","name":"1","orientation":"v","showlegend":true,"x":[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15],"xaxis":"x","y":[0.06522686656327566,-0.2985439254422978,-0.3529650428243609,0.15452178701411728,0.924434724175665,0.5915805486788963,-0.4710046530215321,-0.705518147091979,0.7421774998896639,1.6899986636399336,-1.005180588196383,0.7260694152951993,-0.8328828167265985,-0.9439977739184002,0.2820221653876499,-0.5659387234228137],"yaxis":"y","type":"scatter"},{"hovertemplate":"variable=2<br>index=%{x}<br>value=%{y}<extra></extra>","legendgroup":"2","marker":{"color":"#00cc96","symbol":"circle"},"mode":"markers","name":"2","orientation":"v","showlegend":true,"x":[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15],"xaxis":"x","y":[-0.030897432584074503,0.05534470498475007,-0.046673239045374786,-0.049415866508996625,0.17251210038212067,0.042511425908673746,0.02459814847291919,-0.42635091001487624,-0.26769327253034686,-0.03465505511097459,-0.15067901421206883,0.20237781918359768,1.1336586745335213,-0.31982529808329224,-0.04187638696582264,-0.26293639840976907],"yaxis":"y","type":"scatter"},{"hovertemplate":"variable=3<br>index=%{x}<br>value=%{y}<extra></extra>","legendgroup":"3","marker":{"color":"#ab63fa","symbol":"circle"},"mode":"markers","name":"3","orientation":"v","showlegend":true,"x":[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15],"xaxis":"x","y":[-0.060848585725878895,0.04073855188779411,-0.11447305406162807,-0.1504421842220699,-0.0806480525543868,0.056220033154262355,0.20176069669501415,0.037352777572996924,0.06915097940088331,0.08975786834578584,0.0067980042298577915,-0.003939290997179423,0.01792409575140345,0.010604866804852961,-0.08799553391260996,-0.031961172369049703],"yaxis":"y","type":"scatter"}],                        {"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmapgl":[{"type":"heatmapgl","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermapbox":[{"type":"scattermapbox","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"mapbox":{"style":"light"}}},"xaxis":{"anchor":"y","domain":[0.0,1.0],"title":{"text":"index"}},"yaxis":{"anchor":"x","domain":[0.0,1.0],"title":{"text":"value"}},"legend":{"title":{"text":"variable"},"tracegroupgap":0},"margin":{"t":60}},                        {"responsive": true}                    ).then(function(){
-                            
-var gd = document.getElementById('fe6d51f7-754d-45ca-8ff3-1ee41a013d7b');
-var x = new MutationObserver(function (mutations, observer) {{
-        var display = window.getComputedStyle(gd).display;
-        if (!display || display === 'none') {{
-            console.log([gd, 'removed!']);
-            Plotly.purge(gd);
-            observer.disconnect();
-        }}
-}});
-
-// Listen for the removal of the full notebook cells
-var notebookContainer = gd.closest('#notebook-container');
-if (notebookContainer) {{
-    x.observe(notebookContainer, {childList: true});
-}}
-
-// Listen for the clearing of the current output cell
-var outputEl = gd.closest('.output');
-if (outputEl) {{
-    x.observe(outputEl, {childList: true});
-}}
-
-                        })                };                });            </script>        </div></div></div>
-</div>
+</section>
+<section id="the-data-can-be-clustered-into-six-distince-clusters">
+<h2>The data can be clustered into six distince clusters<a class="headerlink" href="#the-data-can-be-clustered-into-six-distince-clusters" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>First you must create the model using:
+kmeans = KMeans(n_clusters = 6,random_state = 300)</p></li>
+<li><p>Then you must fit the data using “.fit_predict(df)”</p></li>
+<li><p>Once you have the predicted clusters, you can assign them to the dataframe to see where each data input was clustered.</p></li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">kmeans</span> <span class="o">=</span> <span class="n">KMeans</span><span class="p">(</span><span class="n">n_clusters</span> <span class="o">=</span> <span class="mi">6</span><span class="p">,</span><span class="n">random_state</span> <span class="o">=</span> <span class="mi">300</span><span class="p">)</span> <span class="c1">#Creates Clusters and fits data</span>
@@ -3215,6 +2937,13 @@ KMeans is known to have a memory leak on Windows with MKL, when there are less c
 </table>
 </div></div></div>
 </div>
+</section>
+<section id="seeing-difference-between-clusters-and-values">
+<h2>Seeing Difference between clusters and values<a class="headerlink" href="#seeing-difference-between-clusters-and-values" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>After assigning each cluster to the data, split the dataframe into specific dataframes based on clusters. Then you can plot the different variables of each dataframe vs their respective clusters.</p></li>
+<li><p>You can also plot the differences in a boxplot to see differences in spread and variance of the clusters. If the boxplot is smaller, there is less spread in that clustered data</p></li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Clustered Data taken separatly into dataframes to be plotted</span>
@@ -3230,25 +2959,6 @@ KMeans is known to have a memory leak on Windows with MKL, when there are less c
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#PLots Data Frame in Clusters Vs specific attributes</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">df1</span><span class="o">.</span><span class="n">Weight</span><span class="p">,</span> <span class="n">df1</span><span class="o">.</span><span class="n">Height</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;blue&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">df2</span><span class="o">.</span><span class="n">Weight</span><span class="p">,</span> <span class="n">df2</span><span class="o">.</span><span class="n">Height</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;red&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">df3</span><span class="o">.</span><span class="n">Weight</span><span class="p">,</span> <span class="n">df3</span><span class="o">.</span><span class="n">Height</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;green&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">df4</span><span class="o">.</span><span class="n">Weight</span><span class="p">,</span> <span class="n">df4</span><span class="o">.</span><span class="n">Height</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;yellow&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">df5</span><span class="o">.</span><span class="n">Weight</span><span class="p">,</span> <span class="n">df5</span><span class="o">.</span><span class="n">Height</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;Purple&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">df6</span><span class="o">.</span><span class="n">Weight</span><span class="p">,</span> <span class="n">df6</span><span class="o">.</span><span class="n">Height</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;Orange&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.PathCollection at 0x20682108c40&gt;
-</pre></div>
-</div>
-<img alt="_images/6eaaaca9e79e3d3fddd81bc659b1c3fdc7620fde174b24b499a72d21e9a1ba2b.png" src="_images/6eaaaca9e79e3d3fddd81bc659b1c3fdc7620fde174b24b499a72d21e9a1ba2b.png" />
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">boxdata</span> <span class="o">=</span> <span class="p">[</span><span class="n">df1</span><span class="p">[</span><span class="s1">&#39;Height&#39;</span><span class="p">],</span><span class="n">df2</span><span class="p">[</span><span class="s1">&#39;Height&#39;</span><span class="p">],</span><span class="n">df3</span><span class="p">[</span><span class="s1">&#39;Height&#39;</span><span class="p">],</span><span class="n">df4</span><span class="p">[</span><span class="s1">&#39;Height&#39;</span><span class="p">],</span><span class="n">df5</span><span class="p">[</span><span class="s1">&#39;Height&#39;</span><span class="p">],</span><span class="n">df6</span><span class="p">[</span><span class="s1">&#39;Height&#39;</span><span class="p">]]</span>
 </pre></div>
 </div>
@@ -3256,11 +2966,19 @@ KMeans is known to have a memory leak on Windows with MKL, when there are less c
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span><span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">mpl_toolkits.mplot3d</span> <span class="kn">import</span> <span class="n">axes3d</span>
+<span class="kn">from</span> <span class="nn">mpl_toolkits.mplot3d.axes3d</span> <span class="kn">import</span> <span class="n">axis3d</span>
+<span class="n">fig</span><span class="p">,</span><span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+<span class="n">ax1</span> <span class="o">=</span> <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">ax2</span> <span class="o">=</span> <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">ax3</span> <span class="o">=</span> <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">ax4</span> <span class="o">=</span> <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span>
+<span class="c1">################################## Data Feet ##############################</span>
+<span class="n">boxdata</span> <span class="o">=</span> <span class="p">[</span><span class="n">df1</span><span class="p">[</span><span class="s1">&#39;Feet&#39;</span><span class="p">],</span><span class="n">df2</span><span class="p">[</span><span class="s1">&#39;Feet&#39;</span><span class="p">],</span><span class="n">df3</span><span class="p">[</span><span class="s1">&#39;Feet&#39;</span><span class="p">],</span><span class="n">df4</span><span class="p">[</span><span class="s1">&#39;Feet&#39;</span><span class="p">],</span><span class="n">df5</span><span class="p">[</span><span class="s1">&#39;Feet&#39;</span><span class="p">],</span><span class="n">df6</span><span class="p">[</span><span class="s1">&#39;Feet&#39;</span><span class="p">]]</span>
 
-<span class="n">color_all</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span><span class="s1">&#39;green&#39;</span><span class="p">,</span><span class="s1">&#39;red&#39;</span><span class="p">,</span><span class="s1">&#39;orange&#39;</span><span class="p">,</span><span class="s1">&#39;yellow&#39;</span><span class="p">,</span><span class="s1">&#39;k&#39;</span><span class="p">]</span>
-<span class="n">hatch_all</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;|&#39;</span><span class="p">,</span> <span class="s1">&#39;xx&#39;</span><span class="p">,</span><span class="s1">&#39;..&#39;</span><span class="p">,</span> <span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="s1">&#39;-&#39;</span><span class="p">]</span>
-<span class="n">bp</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">boxdata</span><span class="p">,</span><span class="n">patch_artist</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Cluster 1&#39;</span><span class="p">,</span><span class="s1">&#39;Cluster 2&#39;</span><span class="p">,</span><span class="s1">&#39;Cluster 3&#39;</span><span class="p">,</span><span class="s1">&#39;Cluster 4&#39;</span><span class="p">,</span><span class="s1">&#39;Cluster 5&#39;</span><span class="p">,</span><span class="s1">&#39;Cluster 6&#39;</span><span class="p">,]);</span>
+<span class="n">color_all</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;c&#39;</span><span class="p">,</span><span class="s1">&#39;green&#39;</span><span class="p">,</span><span class="s1">&#39;purple&#39;</span><span class="p">,</span><span class="s1">&#39;orange&#39;</span><span class="p">,</span><span class="s1">&#39;yellow&#39;</span><span class="p">,</span><span class="s1">&#39;k&#39;</span><span class="p">]</span>
+<span class="n">hatch_all</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;|&#39;</span><span class="p">,</span> <span class="s1">&#39;xx&#39;</span><span class="p">,</span><span class="s1">&#39;..&#39;</span><span class="p">,</span> <span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="s1">&#39;_&#39;</span><span class="p">]</span>
+<span class="n">bp</span> <span class="o">=</span> <span class="n">ax1</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">boxdata</span><span class="p">,</span><span class="n">patch_artist</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;C 1&#39;</span><span class="p">,</span><span class="s1">&#39;C 2&#39;</span><span class="p">,</span><span class="s1">&#39;C 3&#39;</span><span class="p">,</span><span class="s1">&#39;C 4&#39;</span><span class="p">,</span><span class="s1">&#39;C 5&#39;</span><span class="p">,</span><span class="s1">&#39;C 6&#39;</span><span class="p">,]);</span>
 
 <span class="k">for</span> <span class="n">line</span><span class="p">,</span><span class="n">line1</span><span class="p">,</span><span class="n">line2</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">bp</span><span class="p">[</span><span class="s1">&#39;medians&#39;</span><span class="p">],</span><span class="n">bp</span><span class="p">[</span><span class="s1">&#39;whiskers&#39;</span><span class="p">],</span><span class="n">bp</span><span class="p">[</span><span class="s1">&#39;caps&#39;</span><span class="p">]):</span>
   <span class="n">line</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">linewidth</span> <span class="o">=</span> <span class="mi">2</span><span class="p">)</span>
@@ -3271,16 +2989,118 @@ KMeans is known to have a memory leak on Windows with MKL, when there are less c
   <span class="n">patch</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">facecolor</span> <span class="o">=</span> <span class="n">color</span><span class="p">,</span> <span class="n">linewidth</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">.8</span><span class="p">)</span>
   <span class="n">patch</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">hatch</span> <span class="o">=</span> <span class="n">c_hatch</span><span class="p">)</span>
 
-<span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">.2</span><span class="p">,</span> <span class="n">linewidth</span> <span class="o">=</span> <span class="mf">1.5</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">.2</span><span class="p">,</span> <span class="n">linewidth</span> <span class="o">=</span> <span class="mf">1.5</span><span class="p">)</span>
 
 <span class="k">for</span> <span class="n">axis</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;top&#39;</span><span class="p">,</span><span class="s1">&#39;bottom&#39;</span><span class="p">,</span><span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="s1">&#39;right&#39;</span><span class="p">]:</span>
-  <span class="n">ax</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="n">axis</span><span class="p">]</span><span class="o">.</span><span class="n">set_linewidth</span><span class="p">(</span><span class="mf">1.5</span><span class="p">)</span>
-  <span class="n">ax</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="n">axis</span><span class="p">]</span><span class="o">.</span><span class="n">set_color</span><span class="p">(</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
+  <span class="n">ax1</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="n">axis</span><span class="p">]</span><span class="o">.</span><span class="n">set_linewidth</span><span class="p">(</span><span class="mf">1.5</span><span class="p">)</span>
+  <span class="n">ax1</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="n">axis</span><span class="p">]</span><span class="o">.</span><span class="n">set_color</span><span class="p">(</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
+
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Cluster&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Feet (mm)&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_title</span> <span class="p">(</span><span class="s1">&#39;Cluster Vs Feet&#39;</span><span class="p">)</span>
+
+<span class="c1">################################## Data Weight ##############################</span>
+<span class="n">boxdata</span> <span class="o">=</span> <span class="p">[</span><span class="n">df1</span><span class="p">[</span><span class="s1">&#39;Weight&#39;</span><span class="p">],</span><span class="n">df2</span><span class="p">[</span><span class="s1">&#39;Weight&#39;</span><span class="p">],</span><span class="n">df3</span><span class="p">[</span><span class="s1">&#39;Weight&#39;</span><span class="p">],</span><span class="n">df4</span><span class="p">[</span><span class="s1">&#39;Weight&#39;</span><span class="p">],</span><span class="n">df5</span><span class="p">[</span><span class="s1">&#39;Weight&#39;</span><span class="p">],</span><span class="n">df6</span><span class="p">[</span><span class="s1">&#39;Weight&#39;</span><span class="p">]]</span>
+
+<span class="n">color_all</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;c&#39;</span><span class="p">,</span><span class="s1">&#39;green&#39;</span><span class="p">,</span><span class="s1">&#39;purple&#39;</span><span class="p">,</span><span class="s1">&#39;orange&#39;</span><span class="p">,</span><span class="s1">&#39;yellow&#39;</span><span class="p">,</span><span class="s1">&#39;k&#39;</span><span class="p">]</span>
+<span class="n">hatch_all</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;|&#39;</span><span class="p">,</span> <span class="s1">&#39;xx&#39;</span><span class="p">,</span><span class="s1">&#39;..&#39;</span><span class="p">,</span> <span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="s1">&#39;_&#39;</span><span class="p">]</span>
+<span class="n">bp</span> <span class="o">=</span> <span class="n">ax2</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">boxdata</span><span class="p">,</span><span class="n">patch_artist</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;C 1&#39;</span><span class="p">,</span><span class="s1">&#39;C 2&#39;</span><span class="p">,</span><span class="s1">&#39;C 3&#39;</span><span class="p">,</span><span class="s1">&#39;C 4&#39;</span><span class="p">,</span><span class="s1">&#39;C 5&#39;</span><span class="p">,</span><span class="s1">&#39;C 6&#39;</span><span class="p">,]);</span>
+
+<span class="k">for</span> <span class="n">line</span><span class="p">,</span><span class="n">line1</span><span class="p">,</span><span class="n">line2</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">bp</span><span class="p">[</span><span class="s1">&#39;medians&#39;</span><span class="p">],</span><span class="n">bp</span><span class="p">[</span><span class="s1">&#39;whiskers&#39;</span><span class="p">],</span><span class="n">bp</span><span class="p">[</span><span class="s1">&#39;caps&#39;</span><span class="p">]):</span>
+  <span class="n">line</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">linewidth</span> <span class="o">=</span> <span class="mi">2</span><span class="p">)</span>
+  <span class="n">line1</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">linewidth</span> <span class="o">=</span> <span class="mi">2</span><span class="p">)</span>
+  <span class="n">line2</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">linewidth</span> <span class="o">=</span> <span class="mi">2</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">patch</span><span class="p">,</span> <span class="n">color</span><span class="p">,</span> <span class="n">c_hatch</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">bp</span><span class="p">[</span><span class="s1">&#39;boxes&#39;</span><span class="p">],</span> <span class="n">color_all</span><span class="p">,</span> <span class="n">hatch_all</span><span class="p">):</span>
+  <span class="n">patch</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">facecolor</span> <span class="o">=</span> <span class="n">color</span><span class="p">,</span> <span class="n">linewidth</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">.8</span><span class="p">)</span>
+  <span class="n">patch</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">hatch</span> <span class="o">=</span> <span class="n">c_hatch</span><span class="p">)</span>
+
+<span class="n">ax2</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">.2</span><span class="p">,</span> <span class="n">linewidth</span> <span class="o">=</span> <span class="mf">1.5</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">axis</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;top&#39;</span><span class="p">,</span><span class="s1">&#39;bottom&#39;</span><span class="p">,</span><span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="s1">&#39;right&#39;</span><span class="p">]:</span>
+  <span class="n">ax2</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="n">axis</span><span class="p">]</span><span class="o">.</span><span class="n">set_linewidth</span><span class="p">(</span><span class="mf">1.5</span><span class="p">)</span>
+  <span class="n">ax2</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="n">axis</span><span class="p">]</span><span class="o">.</span><span class="n">set_color</span><span class="p">(</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
+
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Cluster&#39;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Weight (g)&#39;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_title</span> <span class="p">(</span><span class="s1">&#39;Cluster Vs Weight&#39;</span><span class="p">)</span>
+
+<span class="c1">################################## Data Width ##############################</span>
+<span class="n">boxdata</span> <span class="o">=</span> <span class="p">[</span><span class="n">df1</span><span class="p">[</span><span class="s1">&#39;Width&#39;</span><span class="p">],</span><span class="n">df2</span><span class="p">[</span><span class="s1">&#39;Width&#39;</span><span class="p">],</span><span class="n">df3</span><span class="p">[</span><span class="s1">&#39;Width&#39;</span><span class="p">],</span><span class="n">df4</span><span class="p">[</span><span class="s1">&#39;Width&#39;</span><span class="p">],</span><span class="n">df5</span><span class="p">[</span><span class="s1">&#39;Width&#39;</span><span class="p">],</span><span class="n">df6</span><span class="p">[</span><span class="s1">&#39;Width&#39;</span><span class="p">]]</span>
+
+<span class="n">color_all</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;c&#39;</span><span class="p">,</span><span class="s1">&#39;green&#39;</span><span class="p">,</span><span class="s1">&#39;purple&#39;</span><span class="p">,</span><span class="s1">&#39;orange&#39;</span><span class="p">,</span><span class="s1">&#39;yellow&#39;</span><span class="p">,</span><span class="s1">&#39;k&#39;</span><span class="p">]</span>
+<span class="n">hatch_all</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;|&#39;</span><span class="p">,</span> <span class="s1">&#39;xx&#39;</span><span class="p">,</span><span class="s1">&#39;..&#39;</span><span class="p">,</span> <span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="s1">&#39;_&#39;</span><span class="p">]</span>
+<span class="n">bp</span> <span class="o">=</span> <span class="n">ax3</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">boxdata</span><span class="p">,</span><span class="n">patch_artist</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;C 1&#39;</span><span class="p">,</span><span class="s1">&#39;C 2&#39;</span><span class="p">,</span><span class="s1">&#39;C 3&#39;</span><span class="p">,</span><span class="s1">&#39;C 4&#39;</span><span class="p">,</span><span class="s1">&#39;C 5&#39;</span><span class="p">,</span><span class="s1">&#39;C 6&#39;</span><span class="p">,]);</span>
+
+<span class="k">for</span> <span class="n">line</span><span class="p">,</span><span class="n">line1</span><span class="p">,</span><span class="n">line2</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">bp</span><span class="p">[</span><span class="s1">&#39;medians&#39;</span><span class="p">],</span><span class="n">bp</span><span class="p">[</span><span class="s1">&#39;whiskers&#39;</span><span class="p">],</span><span class="n">bp</span><span class="p">[</span><span class="s1">&#39;caps&#39;</span><span class="p">]):</span>
+  <span class="n">line</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">linewidth</span> <span class="o">=</span> <span class="mi">2</span><span class="p">)</span>
+  <span class="n">line1</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">linewidth</span> <span class="o">=</span> <span class="mi">2</span><span class="p">)</span>
+  <span class="n">line2</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">linewidth</span> <span class="o">=</span> <span class="mi">2</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">patch</span><span class="p">,</span> <span class="n">color</span><span class="p">,</span> <span class="n">c_hatch</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">bp</span><span class="p">[</span><span class="s1">&#39;boxes&#39;</span><span class="p">],</span> <span class="n">color_all</span><span class="p">,</span> <span class="n">hatch_all</span><span class="p">):</span>
+  <span class="n">patch</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">facecolor</span> <span class="o">=</span> <span class="n">color</span><span class="p">,</span> <span class="n">linewidth</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">.8</span><span class="p">)</span>
+  <span class="n">patch</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">hatch</span> <span class="o">=</span> <span class="n">c_hatch</span><span class="p">)</span>
+
+<span class="n">ax3</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">.2</span><span class="p">,</span> <span class="n">linewidth</span> <span class="o">=</span> <span class="mf">1.5</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">axis</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;top&#39;</span><span class="p">,</span><span class="s1">&#39;bottom&#39;</span><span class="p">,</span><span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="s1">&#39;right&#39;</span><span class="p">]:</span>
+  <span class="n">ax3</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="n">axis</span><span class="p">]</span><span class="o">.</span><span class="n">set_linewidth</span><span class="p">(</span><span class="mf">1.5</span><span class="p">)</span>
+  <span class="n">ax3</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="n">axis</span><span class="p">]</span><span class="o">.</span><span class="n">set_color</span><span class="p">(</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
+
+<span class="n">ax3</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Cluster&#39;</span><span class="p">)</span>
+<span class="n">ax3</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Width (mm)&#39;</span><span class="p">)</span>
+<span class="n">ax3</span><span class="o">.</span><span class="n">set_title</span> <span class="p">(</span><span class="s1">&#39;Cluster Vs Width&#39;</span><span class="p">)</span>
+
+<span class="c1">################################## Data Height ##############################</span>
+<span class="n">boxdata</span> <span class="o">=</span> <span class="p">[</span><span class="n">df1</span><span class="p">[</span><span class="s1">&#39;Height&#39;</span><span class="p">],</span><span class="n">df2</span><span class="p">[</span><span class="s1">&#39;Height&#39;</span><span class="p">],</span><span class="n">df3</span><span class="p">[</span><span class="s1">&#39;Height&#39;</span><span class="p">],</span><span class="n">df4</span><span class="p">[</span><span class="s1">&#39;Height&#39;</span><span class="p">],</span><span class="n">df5</span><span class="p">[</span><span class="s1">&#39;Height&#39;</span><span class="p">],</span><span class="n">df6</span><span class="p">[</span><span class="s1">&#39;Height&#39;</span><span class="p">]]</span>
+
+<span class="n">color_all</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;c&#39;</span><span class="p">,</span><span class="s1">&#39;green&#39;</span><span class="p">,</span><span class="s1">&#39;purple&#39;</span><span class="p">,</span><span class="s1">&#39;orange&#39;</span><span class="p">,</span><span class="s1">&#39;yellow&#39;</span><span class="p">,</span><span class="s1">&#39;k&#39;</span><span class="p">]</span>
+<span class="n">hatch_all</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;|&#39;</span><span class="p">,</span> <span class="s1">&#39;xx&#39;</span><span class="p">,</span><span class="s1">&#39;..&#39;</span><span class="p">,</span> <span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="s1">&#39;_&#39;</span><span class="p">]</span>
+<span class="n">bp</span> <span class="o">=</span> <span class="n">ax4</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">boxdata</span><span class="p">,</span><span class="n">patch_artist</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;C 1&#39;</span><span class="p">,</span><span class="s1">&#39;C 2&#39;</span><span class="p">,</span><span class="s1">&#39;C 3&#39;</span><span class="p">,</span><span class="s1">&#39;C 4&#39;</span><span class="p">,</span><span class="s1">&#39;C 5&#39;</span><span class="p">,</span><span class="s1">&#39;C 6&#39;</span><span class="p">,]);</span>
+
+<span class="k">for</span> <span class="n">line</span><span class="p">,</span><span class="n">line1</span><span class="p">,</span><span class="n">line2</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">bp</span><span class="p">[</span><span class="s1">&#39;medians&#39;</span><span class="p">],</span><span class="n">bp</span><span class="p">[</span><span class="s1">&#39;whiskers&#39;</span><span class="p">],</span><span class="n">bp</span><span class="p">[</span><span class="s1">&#39;caps&#39;</span><span class="p">]):</span>
+  <span class="n">line</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">linewidth</span> <span class="o">=</span> <span class="mi">2</span><span class="p">)</span>
+  <span class="n">line1</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">linewidth</span> <span class="o">=</span> <span class="mi">2</span><span class="p">)</span>
+  <span class="n">line2</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">linewidth</span> <span class="o">=</span> <span class="mi">2</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">patch</span><span class="p">,</span> <span class="n">color</span><span class="p">,</span> <span class="n">c_hatch</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">bp</span><span class="p">[</span><span class="s1">&#39;boxes&#39;</span><span class="p">],</span> <span class="n">color_all</span><span class="p">,</span> <span class="n">hatch_all</span><span class="p">):</span>
+  <span class="n">patch</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">facecolor</span> <span class="o">=</span> <span class="n">color</span><span class="p">,</span> <span class="n">linewidth</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">.8</span><span class="p">)</span>
+  <span class="n">patch</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">hatch</span> <span class="o">=</span> <span class="n">c_hatch</span><span class="p">)</span>
+
+<span class="n">ax4</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">.2</span><span class="p">,</span> <span class="n">linewidth</span> <span class="o">=</span> <span class="mf">1.5</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">axis</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;top&#39;</span><span class="p">,</span><span class="s1">&#39;bottom&#39;</span><span class="p">,</span><span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="s1">&#39;right&#39;</span><span class="p">]:</span>
+  <span class="n">ax4</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="n">axis</span><span class="p">]</span><span class="o">.</span><span class="n">set_linewidth</span><span class="p">(</span><span class="mf">1.5</span><span class="p">)</span>
+  <span class="n">ax4</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="n">axis</span><span class="p">]</span><span class="o">.</span><span class="n">set_color</span><span class="p">(</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
+
+<span class="n">ax4</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Cluster&#39;</span><span class="p">)</span>
+<span class="n">ax4</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Height (mm)&#39;</span><span class="p">)</span>
+<span class="n">ax4</span><span class="o">.</span><span class="n">set_title</span> <span class="p">(</span><span class="s1">&#39;Cluster Vs Height&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/6e095e1239196936039fc2cb75ba18e9543f8a06ddce62d525db6afb4e29bbcb.png" src="_images/6e095e1239196936039fc2cb75ba18e9543f8a06ddce62d525db6afb4e29bbcb.png" />
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\12032\AppData\Local\Temp\ipykernel_9804\2719491879.py:22: MatplotlibDeprecationWarning:
+
+hatch must consist of a string of &quot;*+-./OX\ox|&quot; or None, but found the following invalid values &quot;_&quot;. Passing invalid values is deprecated since 3.4 and will become an error in 3.7.
+
+C:\Users\12032\AppData\Local\Temp\ipykernel_9804\2719491879.py:48: MatplotlibDeprecationWarning:
+
+hatch must consist of a string of &quot;*+-./OX\ox|&quot; or None, but found the following invalid values &quot;_&quot;. Passing invalid values is deprecated since 3.4 and will become an error in 3.7.
+
+C:\Users\12032\AppData\Local\Temp\ipykernel_9804\2719491879.py:74: MatplotlibDeprecationWarning:
+
+hatch must consist of a string of &quot;*+-./OX\ox|&quot; or None, but found the following invalid values &quot;_&quot;. Passing invalid values is deprecated since 3.4 and will become an error in 3.7.
+
+C:\Users\12032\AppData\Local\Temp\ipykernel_9804\2719491879.py:100: MatplotlibDeprecationWarning:
+
+hatch must consist of a string of &quot;*+-./OX\ox|&quot; or None, but found the following invalid values &quot;_&quot;. Passing invalid values is deprecated since 3.4 and will become an error in 3.7.
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;Cluster Vs Height&#39;)
+</pre></div>
+</div>
+<img alt="_images/122f0ef8a4e56c1dac64d57d8c8db5619509f83a5a79b3b3a4fde7318e670acc.png" src="_images/122f0ef8a4e56c1dac64d57d8c8db5619509f83a5a79b3b3a4fde7318e670acc.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -3310,7 +3130,6 @@ KMeans is known to have a memory leak on Windows with MKL, when there are less c
 <span class="n">axis</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">df2</span><span class="o">.</span><span class="n">Feet</span><span class="p">,</span> <span class="n">df2</span><span class="o">.</span><span class="n">Width</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;red&#39;</span><span class="p">)</span>
 <span class="n">axis</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">df3</span><span class="o">.</span><span class="n">Feet</span><span class="p">,</span> <span class="n">df3</span><span class="o">.</span><span class="n">Width</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;green&#39;</span><span class="p">)</span>
 <span class="n">axis</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Feet Vs Width&quot;</span><span class="p">)</span>
-  
 </pre></div>
 </div>
 </div>
@@ -3321,14 +3140,13 @@ KMeans is known to have a memory leak on Windows with MKL, when there are less c
 <img alt="_images/788e0616f37df49b88e22429be76e714b1c9a76779780960ce17aaec00b24d8c.png" src="_images/788e0616f37df49b88e22429be76e714b1c9a76779780960ce17aaec00b24d8c.png" />
 </div>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">########### PCA MPG Data ################</span>
-</pre></div>
-</div>
-</div>
-</div>
 </section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="conclusion">
+<h1>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this heading">#</a></h1>
+<ul class="simple">
+<li><p>PCA and KMeans clustering are two very powerful tools in machine learning. PCA allows us to reduce the dimension of data while KMeans helps us cluster and categorize data. Both these tools can be very very helpful in financial analysis as they can be used to relate groups of stocks to eachother and see their combined effects on a mutual fund. For example, certain stocks might make up and have a larger effect on a multual funds portfolio and a small change in one stock can cause a large change in another stock. Overall, these can and should be utilized for financial analysis of the stock market</p></li>
+</ul>
 </section>
 
     <script type="text/x-thebe-config">
@@ -3389,6 +3207,7 @@ KMeans is known to have a memory leak on Windows with MKL, when there are less c
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Financial Modelling And Machine Learning</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#before-using-data-we-must-download-a-library-which-can-take-live-stock-data-from-the-market">Before using data, we must download a library which can take live stock data from the market.</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#libraries-must-be-downloaded-to-be-used-with-the-linear-regression-model">Libraries Must be Downloaded to be used with the linear regression model</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#download-live-stock-data-using-specific-ticker">Download live stock data using specific ticker</a></li>
@@ -3396,7 +3215,24 @@ KMeans is known to have a memory leak on Windows with MKL, when there are less c
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-stock-data-can-be-fit-over-all-time-and-a-trend-can-be-calulated">The stock data can be fit over all time and a trend can be calulated</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#running-a-trendline-on-the-full-set-of-data-down-not-make-logical-sense-so-what-do-you-do">Running a trendline on the full set of data down not make logical sense, so what do you do?</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-a-trendline-does-not-predict-data-so-you-must-predict-into-the-future">Creating a trendline does not predict data, so you must predict into the future</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regressions-can-be-split">Regressions can be split</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#principle-componant-anlysis-and-kmeans-clustering">Principle Componant Anlysis And KMeans Clustering</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-can-be-grouped-for-ease-of-analysis">Data Can be grouped for ease of analysis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-must-be-cleaned">Data must be cleaned</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plotting-data">Plotting Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#categorical-data-cannot-be-analzed-yet">Categorical Data cannot be analzed… yet…</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cluster-data">Cluster Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-train-and-evaluation">Data Train and Evaluation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#final-clustering-and-data-analysis">Final Clustering and Data Analysis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pca-was-run-with-4-components-to-see-which-had-the-largest-effect-on-the-data">PCA was run with 4 components to see which had the largest effect on the data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plotting-pca">Plotting PCA</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-data-can-be-clustered-into-six-distince-clusters">The data can be clustered into six distince clusters</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#seeing-difference-between-clusters-and-values">Seeing Difference between clusters and values</a></li>
 </ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">Conclusion</a></li>
+</ul>
+
   </nav></div>
 
 </div></div>
